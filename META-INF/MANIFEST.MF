@@ -2,4 +2,4 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Guigen documentation
 Bundle-SymbolicName: guigen.docs; singleton:=true
-Bundle-Version: 1.6.1.030
+Bundle-Version: 1.6.1.031
