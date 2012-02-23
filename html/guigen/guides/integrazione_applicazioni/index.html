@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Guida alla integrazione tra applicazioni a livello di User Interface</title>
+      <link type="text/css" href="../../mddtools.css" rel="stylesheet"/>
+   </head>
+
+   <body>
+      <h2>
+         Guida alla integrazione di applicazioni a livello di User Interface
+      </h2>
+      <h3>Tipologie di integrazione</h3>
+      <p>
+      L'integrazione tra applicazioni a livello di user interface &egrave; una delle modalit&agrave; di integrazione 
+      tra applicazioni. Un'altra modalit&agrave; &egrave; rappresentata dall'integrazione tramite <i>back end comune SOA</i>,
+      che per&ograve; non &egrave; oggetto di questa guida. L'integrazione tra due applicazioni a livello di user interface 
+      si esplicita tramite una operativit&agrave; che l'utente attua in parte sulla prima applicazione e in parte sulla seconda, 
+      talvolta condividendo a livello logico parte del contesto applicativo oppure il contesto di sicurezza. 
+      </p>
+      <p>
+      I tipici scenari in cui entra in gioco questo tipo di integrazione sono:
+      <ol>
+      <li>passaggio di controllo tra applicazione principale / applicazione accessoria (esempio: applicazione di workspace di un
+      sistema di BPM - applicazioni che realizzano i task di human interaction del processo)</li>
+      <li>coabitazione di applicazioni in un sistema di single-sign-on</li>
+      </ol>
+      </p>
+      <p>
+      Per ottenere questo tipo di integrazione (specialmente per quanto riguarda lo scenario #1)tipicamente &egrave; 
+      necessario predisporre opportunamente sia l'applicazione chiamante che quella chiamata. Di seguito sono descritti i passi da
+      compiere utilizzando <b>guigen</b>. 
+      </p>
+      <h3>Predisposizione alla integrazione in entrata (applicazione &quot;chiamata&quot;)</h3>
+      <p>
+      Di seguito le attivit&agrave; da svolgere in <b>guigen</b> sull'applicazione chiamata per predisporsi ad essere invocata 
+      da un'altra applicazione.
+      </p>
+      
+      <h4>Predisposizione alla ricezione di parametri di attivazione e inizializzazione del contesto applicativo</h4>
+      <p>
+      In molti casi l'applicazione chiamata, per poter svolgere correttamente il suo compito, necessita di un contesto 
+      applicativo inizializzato all'ingresso nell'applicazione e dipendente dal contesto applicativo presente nell'applicazione
+      chiamante al momento della chiamata. Un tipico esempio di questo &egrave; rappresentato dalla <i>mini-app</i> di un processo 
+      BPM che deve venire innescata in modo da operare sulla istanza del processo selezionata nell'applicazione chiamante 
+      (il workspace). Per fare ci&ograve; &egrave; necessario che l'applicazione chiamante passi all'applicazione chiamata
+      uno o pi&ugrave; parametri che permettano all'applicazione chiamata di inizializzare il contesto.
+      </p>
+      <p>
+      In <b>guigen</b> il modo in cui &egrave; possibile predisporre un'applicazione a ricevere parametri di attivazione
+      &egrave; rappresentato dall'<b>ActivatonModel</b> (che si definisce come nodo figlio del nodo <b>GUIModel</b>).
+      L'<b>ActivationModel</b> non &egrave; altro che un contenitore di elementi di tipo <b>ActivationParam</b>: ciascun
+      <b>ActivationParam</b> corrisponde ad un parametro di attivazione. Il nome del parametro &egrave; libero, mentre il tipo
+      del parametro pu&ograve; solamente essere un <b>SimpleType</b>. Nell'immagine seguente &egrave; mostrato un esempio di
+      modello di attivazione.
+      </p>
+      <img src="img/activation_model.gif" border="1"/>
+      <p>
+      L'inizializzazione del contesto deve avvenire al momento dell'ingresso nell'applicazione chiamata. Pertanto &egrave; 
+      necessario modellare la logica corrispondente nella catena di comandi che si definisce al di sotto dell'elemento
+      <b>ApplicationArea</b> e che viene eseguito solo all ingresso nella action HomePage.do. I parametri modellati 
+      nell'<b>ActivationModel</b> saranno disponibili in tale logica.
+      </p>
+      
+      
+      <h4>Home page dinamica</h4>
+      <p>
+      In alcuni casi l'operativit&agrave; sull'applicazione chiamata potrebbe dover iniziare da una schermata differente a seconda
+      di alcune condizioni al contorno (dati sul DB, valore di un parametro di attivazione). Per realizzare questo scenario di
+      home page dinamica sull'applicazione chiamante &egrave; sufficiente che la catena di comandi di inizializzazione contenga come
+      ultimi comandi un <b>ExecCommand</b> con tanti <b>Outcome</b> quante sono i possibili punti di ingresso. Un esempio
+      &egrave; riportato nella figura che segue. 
+      </p>
+      <img src="img/homepage_dinamica.gif" border="1"/>
+      
+      <h4>URL di ingresso nell'applicazione chiamata</h4>
+      <p>A fronte della definizione (opzionale) di un <b>ActivationModel</b> l'URL con cui &egrave; necessario invocare un'applicazione
+      generata da <b>guigen</b> &egrave; nel formato: <code>http://&lt;host&gt;/&lt;context&gt;/?&lt;param_1&gt;=&lt;valore_1&gt;&amp;&lt;param_2&gt;=&lt;valore_2&gt;...</code>
+      </p>
+      <p><b>N.B:</b> &egrave; importante <b>non</b> includere la action iniziale <code>HomePage.do</code> nell'url di innesco, pena il 
+      malfunzionamento del meccanismo degli arricchimenti javascript (in particoalre alcuni eventi sulle combobox non funzioneranno).</p>
+      <h3>Richiamo di un'applicazione da una applicazione generata da guigen</h3>
+      <p>
+      Per richiamare un'applicazione da un'applicazione generata con <b>guigen</b> &egrave; possibile utilizzare un <b>JumpExtCommand</b>.
+      A seconda che l'URL da richiamare contenga o meno dei parametri da calcolare a runtime &egrave; necessario impostare l'attributo
+      <i>runtimeUrlProvider</i> facendolo puntare ad un <b>ApplicationData</b> di tipo stringa che conterr&agrave; a runtime l'url
+      completo da richiamare (parametri compresi).
+      </p>
+      <img src="img/jump_ext.gif" border="1"/>
+      
+      <h3>Non interferenza tra sessioni applicative</h3>
+      <p>
+      Le sessioni applicative delle due applicazioni (chiamante e chiamata) sono disgiunte e non hanno punti di contatto.
+      Il meccanismo di <i>session tracking</i> di j2ee prevede l'utilizzo di un <i>cookie</i> di nome <i>JSESSIONID</i> che viene
+      memorizzato nel browser e passato al server ad ogni interazione in modo che questo possa riconoscere a quale sessione fa 
+      riferimento. Nel caso in cui vi siano due applicazioni che si alternano nello stesso browser i <i>JSESSIONID</i> in gioco
+      sono due:
+      </p>
+      <ol>
+      <li>quello dell'applicazione chiamante</li>
+      <li>quello dell'applicazione chiamata</li>
+      </ol> 
+      <p>
+      Per fare in modo che non vi sia una sovrapposizione dei valori dei due cookie &egrave; necessario fare in modo che ciascuno
+      dei due sia relativo al contesto dell'applicazione che lo ha generato, ovvero &egrave; necessario impostare il 
+      <i>cookie-path</i>.
+      Per far ci&ograve; si agisce in modo differente a seconda che l'applicazione sia ospitata da u server <i>weblogic</i> oppure
+      un server <i>jboss</i>.
+      </p>
+      <h4>cookie path in weblogic</h4>
+      <p>
+      Per impostare il cookie path in weblogic &egrave; necessario agire sul file weblogic.xml contenuto nella directory WEB-INF del
+      WAR. In questa versione di generatore l'impostazione &egrave; automatica in fase di generazione. Poich&egrave; per&ograve;
+      essa &egrave; contenuta in una regione protetta, per gli applicativi generati con versioni precedenti &egrave; necessario in
+      alternativa:
+      </p>
+      <ul>
+      <li>modificare manualmente il file nella regione protetta</li>
+      <li>cancellare il file weblogic.xml in modo che possa essere rigenerato pulito (ripristinando poi manualmente eventuali
+      personalizzazioni precedentemente presenti nella regione protetta).</li>
+      </ul>
+      <h4>cookie path in JBoss</h4>
+      <p>Le installazioni standard di JBoss possiedono automaticamente l'impostazione corretta del cookie path: in questo caso
+      non &egrave; necessario fare nulla. Gli ambienti standard CSI potrebbero per&ograve; avere questa caratteristica inibita:
+      guigen permette di ripristianrla localmente all'applicativo. Per far ci&ograve; &egrave; necessario impostare a <i>true</i>
+      la property <code>guigen.sessioncookievalve</code> nel file dei parametri di build dei vari ambienti. questo permette di impostare
+      la variazione solo sugli ambienti ove questo sia effettivamente necessario. L'effetto di questa impostazione &egrave;
+      rappresentata dalla presenza nel file <code>context.xml</code> di una direttiva <i>Valve</i> specifica.</p>
+      <p>N.B: questa impostazione &egrave; molto specifica della server farm CSI e di norma non &egrave; necessaria su ambienti 
+      standard red-hat.</p>
+      
+      <h3>Integrazione tra applicazioni per convivenza nel sistema di SSO</h3>
+      <p>Se un'applicazione utilizza un meccanismo di autenticazione che prevede un meccanismo di single-sign-on,
+      automaticamente stabilisce la possibilit&agrave; di una <i>integrazione implicita</i> con le altre applicazioni
+      che partecipano allo stesso dominio di SSO.</p>
+      <p>In questo scenario gli accorgimenti che tipicamente occorre tener presenti sono:</p>
+      <ul>
+      <li>Evitare l'interferenza tra le sessioni dei vari applicativi: questo si realizza con il meccanismo del 
+      <i>cookie path</i> descritto in precedenza</li>
+      <li>Tenedo presente la relae semantica delle operazioni di logout locale e logout da SSO:
+      	<ul>
+      	<li>il local logout di un'applicazione che parteciapa ad un sistema di SSO <b>non chiude</b> la sessione di SSO</li>
+      	<li>il logout da SSO effettuato su un'applicazione termina la sessione di SSO anche per le altre applicazioni che
+      	partecipano al sistema di SSO
+      	</ul>
+      </li>
+      </ul>
+      <p>N.B: questa nota non rappresenta una trattazione completa degli scenari possibili, ma solo un richiamo all'attenzione delle
+      implicazioni che la partecipazione ad un sistema di SSO comporta.</p>
+   </body>
+</html>
