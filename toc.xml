@@ -66,6 +66,8 @@
        </topic>
     </topic>
     <topic href="html/guigen/guides/guides.html" label="Guide">
+       <topic href="html/guigen/guides/modularizzazione/index.html" label="Modularizzazione: buone pratiche">
+       </topic>
        <topic href="html/guigen/guides/stilizzazione_grafica/index.html" label="Stilizzazione grafica">
        </topic>
        <topic href="html/guigen/guides/esposizione_multiportale/index.html" label="Esposizione multiportale">
