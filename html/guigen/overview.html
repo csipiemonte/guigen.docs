@@ -10,7 +10,7 @@
       </h2>
       <h3>Introduzione</h3>
 
-	<p><i>versione: 2.0.0</i></p>
+	<p><i>versione: 2.1.0</i></p>
 	<p>
 	<b>GUIGEN</b> &egrave; un generatore <b>model-driven</b> di front-end applicativi.
 	Permette la generazione di applicazioni <end-user> a partire da un modello dichiarativo dell'applicazione e con l'aggiunta manuale 
@@ -39,7 +39,7 @@
           <ul>
           <li>eventi associati ai vari componenti di controllo (menu, pulsanti, etc.)</li>
           <li>azioni (comandi) scatenate a fronte di un evento su un componente di controllo</li>
-          <li>modifica stato dei widget (disabilitazione/visibilità, ...)</li>
+          <li>modifica stato dei widget (disabilitazione/visibilitï¿½, ...)</li>
  		  </ul>
  		</li>
  		</ul>
@@ -137,12 +137,12 @@
 	  <li>un <b>header</b> e un <b>footer</b> che contengono informazioni statiche non gestite da applicativo (che in genere sono determinate dalla 
 	      collocazione di un applicativo in un particolare contesto (es. sito web) e che non varia da applicazione ad applicazione</li>
 		
-	  <li>una area applicativa <b>ApplicationArea</b> che dipende dalla particolare applicazione. A sua volta questa area applicativa è
+	  <li>una area applicativa <b>ApplicationArea</b> che dipende dalla particolare applicazione. A sua volta questa area applicativa ï¿½
 		  strutturata in:
 	    <ul>  
 		<li>una struttura a menu (<b>MenuBar</b>)</li>			
 		<li>un'insieme di schermate applicative (<b>ContentPanel</b>) che si avvicendano a fronte del flusso funzionale dell'applicativo e sono 
-		visualizzate all'interno dell'area invariante (header, footer). Il menu è gestito come widget in modo da poter essere collocato 
+		visualizzate all'interno dell'area invariante (header, footer). Il menu ï¿½ gestito come widget in modo da poter essere collocato 
 		in tutte le schermate.</li>
 	    </ul> 
 	  </li>
@@ -152,18 +152,18 @@
 	  
 	  <ul>
 	  
-	  <li><b>CommandPanel</b>: tipo specializzato di <b>Panel</b> che può contenere solo <b>widget</b> di tipo <b>Command</b> (pulsanti)</li>
+	  <li><b>CommandPanel</b>: tipo specializzato di <b>Panel</b> che puï¿½ contenere solo <b>widget</b> di tipo <b>Command</b> (pulsanti)</li>
 		  
 	  <li><b>DialogPanel</b>: pannello utilizzato per la visualizzazione di popup</li>
 	  
 	  <li><b>FormPanel</b>: pannello destinato a contenere esclusivamente <b>sottopannelli</b></li>
 	     
-	  <li><b>MenuPanel</b>: tipo specializzato di <b>Panel</b> che può contenere solo <b>widget</b> di tipo menu o affini (attualmente
+	  <li><b>MenuPanel</b>: tipo specializzato di <b>Panel</b> che puï¿½ contenere solo <b>widget</b> di tipo menu o affini (attualmente
 		   solo <b>MenuView</b> o <b>TreeView</b>).</li>
 	  
-	  <li><b>MsgBoxPanel</b>: pannello utilizzabile per la visualizzazione di messaggi o html custom (può contenere soloun tipo di widget: il <b>PlainText</b></li>
+	  <li><b>MsgBoxPanel</b>: pannello utilizzabile per la visualizzazione di messaggi o html custom (puï¿½ contenere soloun tipo di widget: il <b>PlainText</b></li>
 	  
-	  <li><b>MultiPanel</b>: Pannello mutevole: può assumere differenti forme in base ai sottopannelli contenuti (il contenuto di ciascun sottopannello &egrave; a sua volta un <b>pannello</b>)</li>
+	  <li><b>MultiPanel</b>: Pannello mutevole: puï¿½ assumere differenti forme in base ai sottopannelli contenuti (il contenuto di ciascun sottopannello &egrave; a sua volta un <b>pannello</b>)</li>
 	  
 	  <li><b>PanelDefUse</b>: Utilizzo di pannello definito esternamente: permette la definizione di frammenti di U.I. riusabili in pi&ugrave; modelli / punti del modello.</li>
 	
@@ -190,7 +190,7 @@
 	    <ul>	
 	  	<li>applicabile a sottopannelli e widget;</li>
 	  		
-	  	<li>l'ordine di visualizzazione è dall'alto in basso a seconda dell'ordine in cui i componenti appaiono nel modello (non sono 
+	  	<li>l'ordine di visualizzazione ï¿½ dall'alto in basso a seconda dell'ordine in cui i componenti appaiono nel modello (non sono 
 	  		necessarie delle <b>layout specification</b> aggiuntive);</li>
 	  	</ul>
 	  </li>
@@ -199,7 +199,7 @@
 	  	<ul>
 	  	<li>applicabile a sottopannelli e widget;</li>
 	  		
-	  	<li>l'ordine di visualizzazione è dasinistra a destra a seconda dell'ordine in cui i componenti appaiono nel modello (non sono 
+	  	<li>l'ordine di visualizzazione ï¿½ dasinistra a destra a seconda dell'ordine in cui i componenti appaiono nel modello (non sono 
 	  		  necessarie delle <b>layout specification</b> aggiuntive;</li>
 	  	</ul>
 	  </li>
@@ -296,7 +296,7 @@
 			
 		  <li>Pulsanti a scelta esclusiva in un insieme di opzioni definite a tempo di design (<b>RadioButton</b>)</li>
 			
-		  <li>Tabella di visualizzazione (<b>Table</b>) con possibilità di:
+		  <li>Tabella di visualizzazione (<b>Table</b>) con possibilitï¿½ di:
 		  	<ul>
 		  	<li>ordinamento</li>
 		  	<li>paginazione</li>
@@ -373,12 +373,12 @@ E' possibile modellare la maggior parte delle caratteristiche di sicurezza dell'
 	</ul>
 </li>
 
-<li>Autorizzazione/profilazione: &egrave; possibile definire eventuali constraint sulla visibilità o abilitazione di ciascun widget;
+<li>Autorizzazione/profilazione: &egrave; possibile definire eventuali constraint sulla visibilitï¿½ o abilitazione di ciascun widget;
 	i possibili tipi di constraint utilizzabili sono:
 	<ul>
 	<li><b>Actor-based Security Constraint</b>: il widget viene visualizzato/reso attivo solo se l'utente corrente impersonifica un ben determinato Actor di IRIDE2</li>
 	<li><b>Role-based Security Constraint</b>: il widget viene visualizzato/reso attivo solo se l'utente corrente appartiene ad un ben determinato Ruolo di IRIDE2</li>
-	<li><b>UseCase-based Security Constraint</b>: il widget viene visualizzato/reso attivo solo se l'utente corrente è abilitato ad un determinato UseCase di IRIDE2</li>
+	<li><b>UseCase-based Security Constraint</b>: il widget viene visualizzato/reso attivo solo se l'utente corrente ï¿½ abilitato ad un determinato UseCase di IRIDE2</li>
 	<li><b>Custom Security Constraint</b>: il widget viene visualizzato/reso attivo solo se l'utente corrente soddisfa una logica custom (codificata manualmente)</li>
 	</ul>
 </li>
@@ -443,9 +443,9 @@ Lo sviluppatore ha inoltre a disposizione nella business logic le info relative 
 </p>
 <h4>Definizione del comportamento dinamico dell'applicativo</h4>
 <p>
-	Il comportamento dinamico dell'applicativo si concretizza nella possibilità di a<b>ssociare una serie di comandi agli
+	Il comportamento dinamico dell'applicativo si concretizza nella possibilitï¿½ di a<b>ssociare una serie di comandi agli
 	eventi di user interaction</b> che avvengono sull'applicativo.
-	In particolare sono disponibili le seguenti possibilità/comandi:
+	In particolare sono disponibili le seguenti possibilitï¿½/comandi:
 	<ul>
 		<ul>
 		<li>comandi di gestione dello stato della schermata
@@ -476,7 +476,7 @@ Lo sviluppatore ha inoltre a disposizione nella business logic le info relative 
 		<li>comandi di gestioen dello stato applicativo
 		<ul>
 		  <li><b>BeginEditSession</b>: inizia una sessione di editing su un insieme di <b>ApplicationData</b>
-		      mantenendo automaticamente un backup dei dati per un eventuale necessità di <i>undo</i> 
+		      mantenendo automaticamente un backup dei dati per un eventuale necessitï¿½ di <i>undo</i> 
 		  </li>
 		  <li><b>EndEditSession</b>: termina una sessione di editing su un insieme di <b>ApplicationData</b>,
 		      permettendo (se specificato) di effettuare l'<i>undo</i> delle modifiche effettuate durante
