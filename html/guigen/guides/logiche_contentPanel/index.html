@@ -43,8 +43,10 @@
       
       <tr>
 	  <td class="featureOperation">ON_INIT</td>
-	  <td class="featureDescr">Esecuzione di un Action Event una sola volta per sessione applicativa 
-	  <td class="featureDescr">Logiche che dovranno essere eseguite al primo accesso per sessione al ContentPanel, es. caricamento Combo dal contenuto immutabile (es. elenco regioni)
+	  <td class="featureDescr">Esecuzione di un Action Event una sola volta per sessione applicativa
+	  <br>Logiche che devono essere eseguite al primo ingresso sul ContentPanel corrente
+	  </td>
+	  <td class="featureDescr">Caricamento Combo dal contenuto immutabile (es. elenco regioni)
 	  </td>
 	  <td class="featureDescr">Sul prepare() della action viene invocato il metodo per la gestione della logica dell' ON_INIT. Questo dovr&agrave; preceduto da un test su una variabile di sessione che controller&agrave; se si tratta di un primo accesso.</td>
 	  <td class="featureDescr">
@@ -55,8 +57,10 @@
       
       <tr>
 	  <td class="featureOperation">ON_REFRESH</td>
-	  <td class="featureDescr">Esecuzione di un ActionEvent ad ogni refresh della pagina</td>
-	 <td class="featureDescr">Logiche che devono essere rieseguite dopo ogni azione svolta in pagina (init, esecuzione EventHandler), es. gestione messaggi errori in pagina
+	  <td class="featureDescr">Esecuzione di un ActionEvent ad ogni refresh della pagina
+	  <br>Logiche che devono essere rieseguite dopo ogni azione svolta in pagina (init, esecuzione EventHandler), 
+	  </td>
+	  <td class="featureDescr">Gestione messaggi errori in pagina
 	  </td>
 	  <td class="featureDescr">Sul prepare() della action viene invocato il metodo per la gestione della logica dell' ON_REFRESH. In questo modo la logica verr&agrave; eseguita ad ogni refresh della action
 	 
@@ -73,8 +77,8 @@
 	  <td class="featureOperation">ON_ENTER</td>
 	  <td class="featureDescr">Esecuzione di un Action Event ad ogni nuovo accesso a una schermata (es. JumpCommand da voce di menu)
 	  <br>Si differenzia dal ON_REFRESH perch&egrave; non viene scatenato ad ogni ricaricamento della pagina ma solo quando viene effettuato un nuovo accesso alla schermata.
-	  <td class="featureDescr">Logiche che dovranno essere eseguite ad ogni nuovo accesso in pagina e dipendenti dal flusso di navigazione precedente, es. precaricamento dati in schermata
-	  </td>
+	  <br>Logiche che dovranno essere eseguite ad ogni nuovo accesso in pagina e dipendenti dal flusso di navigazione precedente.</td>
+	  <td class="featureDescr"> Precaricamento dati in schermata </td>
 	  <td class="featureDescr">La gestione del On_ENTER viene fatta sull' execute() della action, ossia il metodo che viene invocato dal controller quando riceve una nuova richiesta</td>
 	  <td class="featureDescr">
 	  <ol type="disc">    
@@ -85,7 +89,9 @@
 	  <tr>
 	  <td class="featureOperation">BEFORE_EVENTS</td>
 	  <td class="featureDescr">Esecuzione di un Action Event prima dell' esecuzione della logica di un eventHandler (es. prima dell'esecuzione del command associato a un button)
-	 <td class="featureDescr">Logiche che dovranno essere eseguite prima del doCommand di ogni EventHandler in pagina, es. validazione dati
+	  <br>Logiche che dovranno essere eseguite prima del doCommand di ogni EventHandler in pagina
+	  </td>
+	  <td class="featureDescr">Validazione dati
 	  </td>
 	  <td class="featureDescr">Gestione introdotta sul metodo handle, associato ad ogni eventHandler, prima dell'invocazione del doCommand </td>
 	  <td class="featureDescr">
@@ -98,8 +104,8 @@
 	  <tr>
 	  <td class="featureOperation">AFTER_EVENTS</td>
 	  <td class="featureDescr">Esecuzione di un Action Event dopo dell' esecuzione della logica di un eventHandler (es. prima dell'esecuzione del command associato a un button)
-	 <td class="featureDescr">Logiche che dovranno essere eseguite prima del doCommand di ogni EventHandler in pagina, es. tracciatura WARN e ERROR
-	  </td>
+	  <br> Logiche che dovranno essere eseguite prima del doCommand di ogni EventHandler in pagina
+	  <td class="featureDescr">Tracciatura WARN e ERROR</td>
 	  <td class="featureDescr">Gestione introdotta sul metodo handle, associato ad ogni eventHandler, prima dell'invocazione del doCommand </td>
 	  <td class="featureDescr">
 	  <ol type="disc">
@@ -119,9 +125,12 @@
 	  <td class="featureDescr">Init Sessione Applicativa ContentPanel</td>	
 	  <td class="featureDescr">
 	  <ol type="disc">    
-	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">ON_INIT
+	  <li> <img alt="Operation Non Eseguita" src=".//img/yes.gif">ON_INIT
 	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">ON_REFRESH
-	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">ON_ENTER	  
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">BEFORE_EVENTS
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">Logica EventHandler
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">AFTER_EVENTS 
+	  <li> <img alt="Operation Non Eseguita" src=".//img/yes.gif">ON_ENTER
 	  </ol>
 	  </td>	 
 	   
@@ -131,7 +140,10 @@
 	  <ol type="disc">   
 	  <li> <img alt="Operation Non Eseguita" src=".//img/no.gif">ON_INIT
 	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">ON_REFRESH
-	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">ON_ENTER	  
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">BEFORE_EVENTS
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">Logica EventHandler
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">AFTER_EVENTS 
+	  <li> <img alt="Operation Non Eseguita" src=".//img/yes.gif">ON_ENTER
 	  </ol>
 	  </td>	 
 	  
@@ -139,6 +151,7 @@
 	  <td class="featureDescr">Esecuzione logica di un EventHandler (es. OnClick Button)</td>	
 	  <td class="featureDescr">
 	  <ol type="disc">   
+	  <li> <img alt="Operation Non Eseguita" src=".//img/no.gif">ON_INIT
 	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">ON_REFRESH
 	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">BEFORE_EVENTS
 	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">Logica EventHandler
