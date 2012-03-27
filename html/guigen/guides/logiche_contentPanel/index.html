@@ -19,8 +19,8 @@
       <li> event handler 
       </ol>
       <br>
-      Per poter modellare questa logica a livello di ContentPanel &egrave; stato introdotto il nodo CPCommand (child del nodo raggruppatore <b>CPCommands</b>).
-      Il CPCommand &egrave; caratterizzato da nodo child di tipo command e una property <i>operation</i> che definisce il punto di implementazione :
+      Per poter modellare questa logica a livello di ContentPanel &egrave; stato introdotto il nodo <b>CPCommand</b> (child del nodo raggruppatore <b>CPCommands</b>).
+      Il <b>CPCommand</b> &egrave; caratterizzato da nodo child di tipo command e una property <i>operation</i> che definisce il punto di implementazione :
       <ol type="disc">
       <li>ON_INIT
       <li>ON_REFRESH
@@ -45,10 +45,15 @@
 	  <td class="featureOperation">ON_INIT</td>
 	  <td class="featureDescr">Esecuzione di un Action Event una sola volta per sessione applicativa, ossia esecuzione di logiche applicative ad ogni primo ingresso sul ContentPanel.
 	  </td>
-	  <td class="featureDescr">Caricamento Combo dal contenuto immutabile (es. elenco regioni)
+	  <td class="featureDescr">
+	  Tutte le operazioni che non &egrave; necessario ripetere durante il flusso e che potrebbe ridurre le capacit&agrave; prestazionali
+	  <ol type="disc">
+	  <li>Caricamento Combo dal contenuto immutabile (es. elenco regioni)
+	  <li>Settare variabili di sessione che non variareranno durante il flusso, ad esempio con dati prelevati facendo accesso a DB 
+	  </ol>
 	  </td>
 	  <td class="featureDescr">Sul prepare() della action viene invocato il metodo per la gestione della logica dell' ON_INIT. 
-	  Questo &egrave; preceduto da un test su una variabile di sessione che controller&agrave; se si tratta di un primo accesso.</td>
+	  Per far s&igrave; che la logica venga eseguita solo al primo accesso al ContentPanel il metodo &egrave; preceduto da un test su una variabile di sessione, che controller&agrave; se si tratta di un primo accesso.</td>
 	  <td class="featureDescr">
 	  <ol type="disc">    
 	  <li>un ContentPanel non pu&ograve; contenere pi&ugrave; di un CPCommand di tipo ON_INIT
@@ -59,7 +64,12 @@
 	  <td class="featureOperation">ON_REFRESH</td>
 	  <td class="featureDescr">Esecuzione di un ActionEvent ad ogni refresh della pagina, ossia esecuzione logiche applicative dopo ogni azione svolta in pagina (init, esecuzione EventHandler)
 	  </td>
-	  <td class="featureDescr">Gestione messaggi errori in pagina
+	  <td class="featureDescr">
+	  In questo punto andranno introdotte tutte le operazioni che testano l'eveluzione del ContentPanel dopo ogni singolo evento
+	   <ol type="disc">    
+	  <li>Gestione messaggi errori in pagina
+	  <li>Refresh variabili di sessione dipendenti dallo stato 
+	  </ol>
 	  </td>
 	  <td class="featureDescr">Sul prepare() della action viene invocato il metodo per la gestione della logica dell' ON_REFRESH. In questo modo la logica verr&agrave; eseguita ad ogni refresh della action
 	 
@@ -78,7 +88,12 @@
 	  <br>Si differenzia dal ON_REFRESH perch&egrave; le logiche non vengono eseguite ad ogni ricaricamento della pagina 
 	  ma solo quando viene effettuato un nuovo accesso giungendo da un' altra schermata (ossia logiche dipendenti dal flusso di navigazione).
 	  </td>
-	  <td class="featureDescr">Precaricamento dati in schermata </td>
+	  <td class="featureDescr">
+	  In questo punto dovranno essere eseguite tutte le logiche applicative dipendenti dal flusso di navigazione e che devono essere eseguite a ogni nuovo ingresso in pagina
+	   <ol type="disc">    
+	  <li>Precaricamento dati in schermata (es. schermate di modifica in gestione anagrafica)	  
+	  </ol>
+	  </td>
 	  <td class="featureDescr">La gestione del ON_ENTER viene fatta sull' execute() della action, ossia il metodo che viene invocato dal controller quando riceve una nuova richiesta</td>
 	  <td class="featureDescr">
 	  <ol type="disc">    
@@ -90,8 +105,8 @@
 	  <td class="featureOperation">BEFORE_EVENTS</td>
 	  <td class="featureDescr">Esecuzione di un Action Event prima dell' esecuzione della logica di un eventHandler, 
 	  ossia logiche che dovranno essere eseguite prima del doCommand di ogni EventHandler in pagina
-	  </td>
-	  <td class="featureDescr">Validazione dati
+	  </td>	  
+	  <td class="featureDescr">Validazione dati 
 	  </td>
 	  <td class="featureDescr">Gestione introdotta sul metodo handle, associato ad ogni eventHandler, prima dell'invocazione del doCommand </td>
 	  <td class="featureDescr">
