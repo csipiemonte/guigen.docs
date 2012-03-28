@@ -29,15 +29,20 @@
       <li>AFTER_EVENTS
       </ol>
       
-      Nell' immagine seguente un esempio di modellazione.  
       <br>
-        <br>
-      <img alt="Esempio CPCommand" src=".//img/CPCommandeEsempio.png" border="1px" title="Esempio CPCommand" >
+      
+    <div align="center">
+      	<img alt="Esempio CPCommand" src=".//img/CPCommandeEsempio.png" border="1px" title="Esempio CPCommand" align="middle" >
+     
+    
+       	<br><label ><b>Esempio di modellazione</b></label>
+       	 </div>
       <br>
       <br>
       <br>
       
       <h3>Tipi Operation CPCommand</h3>
+      
   	  <table class="features" title="Tipi Operation Operation">
       <thead><th>Operation</th><th>Descrizione</th><th>Esempio</th><th>Codice Generato</th><th>Check</th></thead>
       <tbody>
@@ -53,8 +58,10 @@
 	  <li>Settare variabili di sessione che non variareranno durante il flusso, ad esempio con dati prelevati facendo accesso a DB 
 	  </ol>
 	  </td>
-	  <td class="featureDescr">Sul prepare() della action viene invocato il metodo per la gestione della logica dell' ON_INIT. 
-	  Per far s&igrave; che la logica venga eseguita solo al primo accesso al ContentPanel il metodo &egrave; preceduto da un test su una variabile di sessione, che controller&agrave; se si tratta di un primo accesso.</td>
+	  <td class="featureDescr">
+	  Generazione del metodo sulla action per la gestione e richiamo del <i>Command</i> modellato sul CPCommand e richiamo sulla prepare().
+	  <br>Poich&egrave; il prepare() viene invocato dopo ogni azione, per vincolare l'esecuzione della logica al primo accesso viene testata una variabile di sessione. Questa variabile testa se si tratta di un primo passaggio.
+	  </td>
 	  <td class="featureDescr">
 	  <ol type="disc">    
 	  <li>un ContentPanel non pu&ograve; contenere pi&ugrave; di un CPCommand di tipo ON_INIT
@@ -66,26 +73,25 @@
 	  <td class="featureDescr">Esecuzione di un ActionEvent ad ogni refresh della pagina, ossia esecuzione logiche applicative dopo ogni azione svolta in pagina (init, esecuzione EventHandler)
 	  <br>NOTE:
 	  <br>Se in pagina viene inserito un CPCommand ON_INIT allora l'ON_REFRESH non verr&agrave; eseguito al primo accesso.
-	  <br>Se viene inserito l'ON_ENTER allora non verr&agrave; eseguito neanche agli ingressi diversi dal primo.
+	  <br>La logica associata all' ON_REFRESH è analoga a quella eseguita dal <i>onRefreshCommand</i> il quale andrà gradualmente dismesso. 	  
 	  </td>
 	  <td class="featureDescr">
 	  In questo punto andranno introdotte tutte le operazioni che testano l'eveluzione del ContentPanel dopo ogni singolo evento
-	   <ol type="disc">    
+	  <ol type="disc">    
 	  <li>Gestione messaggi errori in pagina
 	  <li>Refresh variabili di sessione dipendenti dallo stato 
 	  </ol>
 	  </td>
-	  <td class="featureDescr">Sul prepare() della action viene invocato il metodo per la gestione della logica dell' ON_REFRESH. In questo modo la logica verr&agrave; eseguita ad ogni refresh della action
-	 
+	  <td class="featureDescr">
+	  Generazione del metodo per la gestione e richiamo del <i>Command</i> modellato sul CPCommand e richiamo sulla prepare(). 
+	  <br>In questo modo la logica verr&agrave; eseguita ad ogni refresh della action	 
+	  <br>Se esistono sia l'ON_INIT che l'ON_REFRESH poich&egrave; il prepare() viene invocato dopo ogni azione, per vincolare l'esecuzione della logica a accessi successivi al primo viene testata una variabile di sessione. Questa variabile testa se si tratta di un secondo passaggio.
 	  <td class="featureDescr">
 	  <ol type="disc">
       <li>un ContentPanel non pu&ograve; contenere un CPCommand di tipo ON_REFRESH e un onRefreshCommand contemporaneamente 
 	  <li>un ContentPanel non pu&ograve; contenere pi&ugrave; di un CPCommand di tipo ON_REFRESH
 	  </ol>
 	  </td>
-	  
-	 
-	  
 	  <tr>	  
 	  <td class="featureOperation">ON_ENTER</td>
 	  <td class="featureDescr">Esecuzione di un Action Event ad ogni nuovo accesso a una schermata, mai al primo accesso (es. JumpCommand da voce di menu)
@@ -95,7 +101,7 @@
 	  <td class="featureDescr">
 	  In questo punto dovranno essere eseguite tutte le logiche applicative dipendenti dal flusso di navigazione e che devono essere eseguite a ogni nuovo ingresso in pagina
 	   <ol type="disc">    
-	  <li>Precaricamento dati in schermata (es. schermate di modifica in gestione anagrafica)	  
+	  <li>Precaricamento dati in schermata <br>(es. funzionalit&agrave; modifica in un gestionale)	  
 	  </ol>
 	  </td>
 	  <td class="featureDescr">La gestione del ON_ENTER viene fatta sull' execute() della action, ossia il metodo che viene invocato dal controller quando riceve una nuova richiesta</td>
@@ -137,6 +143,7 @@
       </table>
        
       <h3>Esempi di Eventi</h3>
+      <div align="center">
        <table class="features2" title="Esempi">
       <thead><th>Evento</th><th>Operation Invocati per Evento</th></thead>
       <tbody>
@@ -146,16 +153,29 @@
 	  <td class="featureDescr">
 	  <ol type="disc">    
 	  <li> <img alt="Operation Non Eseguita" src=".//img/yes.gif">ON_INIT
-	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">ON_REFRESH
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">ON_REFRESH
 	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">BEFORE_EVENTS
 	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">Logica EventHandler
 	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">AFTER_EVENTS 
-	  <li> <img alt="Operation Non Eseguita" src=".//img/yes.gif">ON_ENTER
+	  <li> <img alt="Operation Non Eseguita" src=".//img/no.gif">ON_ENTER
 	  </ol>
 	  </td>	 
 	   
 	  <tr>
-	  <td class="featureDescr">Refresh\Ingresso al ContentPanel (diverso dal primo per sessione applicativa) </td>	
+	  <td class="featureDescr">Refresh ContentPanel </td>	
+	  <td class="featureDescr">
+	  <ol type="disc">   
+	  <li> <img alt="Operation Non Eseguita" src=".//img/no.gif">ON_INIT
+	  <li> <img alt="Operation Eseguita" src=".//img/yes.gif">ON_REFRESH
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">BEFORE_EVENTS
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">Logica EventHandler
+	  <li> <img alt="Operation Eseguita" src=".//img/no.gif">AFTER_EVENTS 
+	  <li> <img alt="Operation Non Eseguita" src=".//img/no.gif">ON_ENTER
+	  </ol>
+	  </td>	 
+	  
+	  <tr>
+	  <td class="featureDescr">Nuovo ingresso al ContentPanel (diverso da primo ingresso per sessione)</td>	
 	  <td class="featureDescr">
 	  <ol type="disc">   
 	  <li> <img alt="Operation Non Eseguita" src=".//img/no.gif">ON_INIT
@@ -182,7 +202,7 @@
 	  
       </tbody>
       </table>
-      
+      </div>
        
         </body>
 </html>
