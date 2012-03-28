@@ -64,6 +64,9 @@
       <tr>
 	  <td class="featureOperation">ON_REFRESH</td>
 	  <td class="featureDescr">Esecuzione di un ActionEvent ad ogni refresh della pagina, ossia esecuzione logiche applicative dopo ogni azione svolta in pagina (init, esecuzione EventHandler)
+	  <br>NOTE:
+	  <br>Se in pagina viene inserito un CPCommand ON_INIT allora l'ON_REFRESH non verr&agrave; eseguito al primo accesso.
+	  <br>Se viene inserito l'ON_ENTER allora non verr&agrave; eseguito neanche agli ingressi diversi dal primo.
 	  </td>
 	  <td class="featureDescr">
 	  In questo punto andranno introdotte tutte le operazioni che testano l'eveluzione del ContentPanel dopo ogni singolo evento
@@ -85,7 +88,7 @@
 	  
 	  <tr>	  
 	  <td class="featureOperation">ON_ENTER</td>
-	  <td class="featureDescr">Esecuzione di un Action Event ad ogni nuovo accesso a una schermata (es. JumpCommand da voce di menu)
+	  <td class="featureDescr">Esecuzione di un Action Event ad ogni nuovo accesso a una schermata, mai al primo accesso (es. JumpCommand da voce di menu)
 	  <br>Si differenzia dal ON_REFRESH perch&egrave; le logiche non vengono eseguite ad ogni ricaricamento della pagina 
 	  ma solo quando viene effettuato un nuovo accesso giungendo da un' altra schermata (ossia logiche dipendenti dal flusso di navigazione).
 	  </td>

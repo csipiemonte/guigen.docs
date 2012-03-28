@@ -2,7 +2,7 @@
 
 .features th {text-align:center;empty-cells:collapse;background-color:#CCCCFF;border:1px solid;}
 
-.features td {text-align:center;border:1px solid;}
+.features td {text-align:center;border:1px solid;vertical-align: top;padding: 5px;}
 
 .features2 {width:70%;border: 1px solid #CCCCCC;font-size:12px;border-collapse:collapse;}
 
@@ -11,7 +11,7 @@
 .features2 td {text-align:center;border:1px solid;}
 
 
-td.featureOperation {font-weight:bold; }  
+td.featureOperation {font-weight:bold; vertical-align: middle;}  
 
 td.featureDescr {text-align:left;padding-left:10px;}
 
