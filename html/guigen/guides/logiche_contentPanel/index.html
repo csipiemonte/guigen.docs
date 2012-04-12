@@ -101,9 +101,9 @@
 					eseguita ad ogni richiamo della action. <br>Se sono modellati contemporaneamente sia
 					l'ON_INIT che l'ON_REFRESH, poich&egrave; il metodo <code>prepare()</code> viene
 					invocato prima dell'esecuzione della action, per fare in modo che l'esecuzione della logica
-					avvenga solo negli accessi successivi al primo viene testata una variabile di
-					sessione. Questa variabile testa se si tratta di un secondo
-					passaggio ?????QUALE??????.
+					avvenga solo negli accessi successivi al primo viene testata la variabile onRefreshEvent. 
+					
+					
 				<td class="featureDescr">
 					<ol type="disc">
 						<li>un ContentPanel non pu&ograve; contenere un CPCommand di
@@ -115,7 +115,7 @@
 			<tr>
 				<td class="featureOperation">ON_ENTER</td>
 				<td class="featureDescr">La logica applicativa &egrave; eseguita ad ogni
-					accesso successivo al primo in una schermata. 
+					accesso ad una schermata. 
 				</td>
 				<td class="featureDescr">Un tipico utilizzo di questo punto di innesco &egrave;
 				    quello di eseguire le logiche applicative dipendenti dal flusso di
