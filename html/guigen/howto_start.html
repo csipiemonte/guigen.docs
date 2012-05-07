@@ -177,7 +177,7 @@
       	
       	<code>[File] -&gt; [new...] -&gt; [other...]</code>
       	<p>
-      	E selezionando tra i wizard disponibili il wizard "Guigen model", disponibile
+      	E selezionando tra i wizard disponibili il wizard "Guigen model(modello principale GUIModel)", disponibile
       	nella cartella "guigen wizards". 
       	</p> 
     	<p>
@@ -186,8 +186,7 @@
     	(nell'esempio: <code>mycomp</code>) e il nome del file stesso, che deve essere nel formato <code>&lt;cod_componente&gt;.guigen</code>.
     	</p>
     	<p>
-    	Nella seconda schermata &egrave; necessario selezionare nella combo <code>[model object]</code> l'elemento
-    	<b>GUIModel</b>, corrispondente alla classe dell'elemento che deve essere creato come root del modello.
+    	Nella seconda schermata &egrave; impostato il Tipo Modello <b>GUIModel</b>, corrispondente alla classe dell'elemento che deve essere creato come root del modello.
     	</p>
     	<p>
     	Nella terza schermata &egrave; necessario inserire le informazioni identificative del componente, ovvero:
@@ -199,64 +198,64 @@
     	</ul>
     	</p>
     	<p>
-    	Nella quarta schermata &egrave; necessario inserire la posizione della cartella nella quale sono stati creati i 
-    	due file di libreria <code>commonTNS.guigen</code> e <code>commonAppdata.guigen</code>.
+    	Nella quarta schermata &egrave; necessario inserire alcune informazioni generali dell' applicativo, ovvero:
+	    	<ul>
+	    		<li>Dati <b>Header</b> per Configurazione Portale (vedere documentazione della classe <b>Header</b>):
+	    			<ul>
+	    			<li> <i>Codice Applicativo</i> come codificato sul portale 
+	    			<li> <i>Codice Canale</i> all' interno del portale 
+	    			<li> <i>Link Canale</i> ossia il link alla home page del canale temantico
+	    			<li> <i>Nome Applicativo</i> ossia il nome descrittivo dell'applicazione
+	    			<li> <i>Noma Canale</i> ossia il nome descrittivo del canale tematico
+	    			</ul>
+	    			<br></br>
+	    			<img src="img/howtostart_4.jpg" border="1" title= "Nodo Header"/> 
+	    			<img src="img/howtostart_5.jpg" border="1" title="Properties nodo Header"/>
+	    		<li> Configurazione piattoforma di deploy (<b>TargetPlatform</b>): scegliere se si desidera generare 
+	    		un applicazione web deployabile sotto Weblogic 9.2 (codice WLS92)
+	    		oppure sotto JBoss 43 (codice JBoss43) 
+	    		<li> Abilitazione Arricchimenti
+	    	</ul>
     	</p>
     	<p>
+    	Nella quinta schermata &egrave; necessario inserire la posizione della cartella nella quale sono stati creati i 
+    	due file di libreria <code>commonTNS.guigen</code> e <code>commonAppdata.guigen</code>.
+    	</p>
     	Al termine dell'esecuzione del wizard sar&agrave; creato lo scheletro del modello dell'applicazione, che referenzier&agrave;
     	i due file di libreria.
     	<p>
-    	<img src="img/howtostart_4.jpg" border="1"/> 
-    	<p>
-    	A questo punto &egrave; necessario impostare alcune informazioni generali dell'applicativo:
-    	<ul>
-    		<li>codici applicativo: selezionare nell'albero dell'editor gerarchico l'elemento <b>Header</b>, e inserire
-    		nella view delle properties i valori appropriati (vedere documentazione della classe <b>Header</b>).
-    		<br></br>
-    		<img src="img/howtostart_5.jpg" border="1"/>
-    		</li>
-    		
-    		<li>piattaforma di deploy (<b>TargetPlatform</b>): selezionare nell'albero dell'editor gerarchico l'
-    		elemento <b>GUIModel</b>, tasto destro -&gt; new child -&gt; TargetPlatform, e specificare nella corrispondente scheda delle
-    		properties dell'elemento appena creato nella struttura se si desidera generare un applicazione web deployabile sotto Weblogic 9.2 (codice WLS92)
-    		oppure sotto JBoss 43 (codice JBoss43).
-    		</li>
-    		
-    		<li>aggiungere l'elemento <b>MenuBar</b> come figlio dell'elemento <b>ApplicationArea</b></li>
-    	</ul>
-    	Ricordarsi di salvare il modello al termine dell'operazione.
-    	</p>
-    	
     	<h4>creare il modello di un <b>AppModule</b> </h4>
     	
     	<p>
     	Il passo successivo &egrave; rappresentato dalla creazione di un <b>AppModule</b> destinato a contenere
-    	la <i>home page</i> dell'applicativo: supponiamo che tale <b>AppModule</b> si chiami <i>home</i>.
+    	la <i>home page</i> dell'applicativo.   	
+    		
     	Per fare ci&ograve; &egrave; necessario creare un apposito file di modello 
-    	tramite il wizard che si attiva selezionando da eclipse la voce di menu:
+    	tramite il wizard "Guigen model(moduli specifici da associare al modello principale)", disponibile
+      	nella cartella "guigen wizards", che si attiva selezionando da eclipse la voce di menu 
       	</p>
-      	
       	<code>[File] -&gt; [new...] -&gt; [other...]</code>
-      	<p>
-      	E selezionando tra i wizard disponibili il wizard "Guigen model", disponibile
-      	nella cartella "guigen wizards".
-      	
-      	La creazione di un modello di <b>AppModule</b> &egrave; simile alla creazione del modello principale dell'
-      	applicazione, con la sola differenza che nella schermata di selezione del <code>[model object]</code> &egrave;
-      	necessario selezionare la classe <b>AppModule</b> invece che la classe <b>GUIModel</b>. Il file del modulo 
-      	sar&agrave; creato nella cartella <i>modules</i>.
+      	<p> in alternativa &egrave; attivabile dal menu contestuale sul modello principale (in questo modo verr&agrave; creata in automatico l'associazione tra modello principale e il nuovo AppModule)
+		</p>
+      	<code>[new...] -&gt; [other...]</code>
+    	<p>
+    	Nella prima schermata del wizard &egrave; necessario impostare il percorso della cartella dove deve essere creato il file.
+    	</p>
+    	<p>
+    	Nella seconda schermata &egrave; necessario selezionare nella combo <code>Tipo Modello</code> l'elemento
+    	<b>AppModule</b> e definire il nome. Supponiamo che tale <b>AppModule</b> si chiami <i>home</i>.
+    	<p>
+    	Nella terza schermata sar&agrave; richiesto di specificare il path del modello principale in cui dovr&agrave; essere referenziato il nuovo AppModule.
+    	Quindi sul modello principale il modulo <i>home</i> appena creato verr&agrave; aggiunto nell' elenco dei moduli esterni (<i>ext modules</i>) del nodo <b>ApplicationArea</b>.
     	</p>
     	<p>
     	Al termine dell'esecuzione del wizard verr&agrave; aperto l'editor del file di modello appena creato.
-    	A questo punto &egrave; necessario impostare il nome dell' <b>AppModule</b> inserendolo nella property
-    	<i>name</i>. 
     	</p>
     	
     	<h4>creare una home page minimale</h4>
     	
     	<p>
-    	E' ora il necessario modellare la home page all'interno dell'<b>AppModule</b> <i>home</i> e successivamente
-    	collegare il modulo e la home page al modello principale. Per semplicit&agrave; nell'esempio si creer&agrave; 
+    	E' ora necessario modellare la home page all'interno dell'<b>AppModule</b> <i>home</i>. Per semplicit&agrave; nell'esempio si creer&agrave; 
     	un pannello senza widget (vuoto) con layout verticale.</p>
     	<p>
     	Per modellare la home-page &egrave; necessario eseguire i seguenti passi:
@@ -285,22 +284,9 @@
     	<img src="img/howtostart_6.jpg" alt="modello della home page"></img>
     	</p>
       	<p>
-      	Per referenziare il nuovo <b>AppModule</b> e la home page nel modello principale dell'applicativo &egrave;
-      	necessario eseguire i seguenti passi:
-      	<ol>
-      	<li>aprire l'editor del modello principale (quello il cui nodo radice &egrave; <b>GUIModel</b></li>
-      	<li>importare la risorsa del modello dell'<b>AppModule</b> <i>home</i>, selezionando il nodo root nell'albero
-    	    dell'editor strutturato e azionando con il tasto destro del
-   			mouse la voce <code>[load resource...]</code> e selezinare nel workspace il file dell'
-   			<b>AppModule</b>	
-      	</li>
-      	<li>aggiungere il modulo <i>home</i> all'elenco dei moduli esterni importati, selezionando il nodo 
-      		<b>ApplicationArea</b> e, nella finestra delle property, attivare l'editor di selezione della
-      		properiet&agrave; <i>ext modules</i>, aggiungendo l'elemento <i>AppModule:home</i> 
-      	</li>
-      	<li>impostare l'attributo <i>home page</i> dell'elemento <b>ApplicationArea</b> in modo che 
+      	Per referenziare la home page nel modello principale dell'applicativo &egrave;
+      	necessario impostare l'attributo <i>home page</i> dell'elemento <b>ApplicationArea</b> in modo che 
       	punti al <b>ContentPanel</b> <i>home</i>, selezionandolo tramite la apposita lista di selezione</li>
-      	</ol> 
       	Al termine delle operazioni il modello principale apparir&agrave; come nella figura seguente:
       	<br></br>
       	<img src="img/howtostart_7.jpg" alt="modello principale con home page" ></img>
