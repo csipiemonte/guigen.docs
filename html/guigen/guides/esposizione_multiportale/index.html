@@ -90,9 +90,8 @@
       </ul>
       </p>
       <h3>Modellazione dell'esposizione multiportale </h3>
-      <p>Per modellare l'esposizione dell'applicativo su un insieme di portali &egrave; sufficiente:
-      <ol>
-      <li>modellare, come figlio dell'elemento <b>TargetPlatform</b> all'interno del modello principale
+      <p>Per modellare l'esposizione dell'applicativo su un insieme di portali &egrave; sufficiente
+      modellare, come figlio dell'elemento <b>TargetPlatform</b> all'interno del modello principale
       dell'applicazione un elemento <b>PortalExposition</b> per ogni deifferente esposizione;
       ciascuno di questi elementi:
       	<ul>
@@ -103,14 +102,11 @@
       	in aree tematiche). Nel caso in cui il portale non preveda area tematica viene assunta
       	l'area tematica di default 'general'</li>
       	</ul>
-      </li>
-      <li>configurare il richiamo della cartuccia <i>webres.mwe</i> tante volte quanti sono i portali
-      di esposizione, utilizzando un <i>targetProjectPrefix</i> che contenga un suffisso identificativo
-      del portale a cui il progetto fa riferimento (es.: <b>myappsisp</b> -&gt; <b>myappsisp</b>webres, <b>myapprp</b> -&gt; <b>myapprp<</b>webres)</li>
-      </ol>
       </p>
       <h3>Attivit&agrave; di sviluppo per l'esposizione multi-portale</h3>
-      <p>Non sono previste attivit&agrave; di sviluppo aggiuntive per abilitare l'esposizione multi-portale</p>
+      <p>Non sono previste attivit&agrave; di sviluppo aggiuntive per abilitare l'esposizione multi-portale, 
+      a parte la necessit&agrave; di definire un progetto di risorse statiche per ogni distinta esposizione.</p>
+      
       <h3>Attivit&agrave; di dispiegamento in esercizio legate all'esposizione multi-portale</h3>
       <p>Per dispiegare in esercizio un'applicazione multiportale generata con guigen &egrave; necessario:
       <ol>
