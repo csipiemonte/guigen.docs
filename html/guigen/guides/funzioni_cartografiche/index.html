@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Guida all' implementazioni di funzioni cartografiche</title>
+<link type="text/css" href=".//css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+	<h2>Guida all' implementazioni di funzioni cartografiche</h2>
+	<h3>Introduzione</h3>
+	<p>
+	In <b>guigen</b> per integrare le funzionalit&agrave; cartografiche si fa ricorso al widget <b>MapView</b>, 
+	il quale permette di generare le logiche GIS per gestire e presentare i dati geografici.
+	<p>
+	Le funzionalit&agrave; modellabili sono:
+	<ol>
+	 <li>Visualizzazione</li>
+	 <li>Zoom e Pan
+	 <li>Evento al click su un punto della mappa (sfruttando le coordinate)</li>
+	 <li>Riposizionamento della mappa impostando le coordinate da Business Logic</li> 	 
+	 <li>Switch Layer (Satelite e Mappa)</li>
+	 <li>Editing di geometrie sulla mappa o da Business Logic su layer acetato</li>		
+	</ol>
+	
+	<h3>Modellazione Funzialit&agrave; base: Visualizzazione, Zoom e Pan</h3>	
+	
+	Per modellare <b>Visualizzaizone</b>, <b>Zoom</b> e <b>Pan</b> di una mappa &egrave; necessario eseguire i seguenti passi:
+	<ol>	
+	<li> Creare un <b>WidgetPanel</b> all' interno del panel in cui vorremo che venga visualizzata la mappa
+	<li> Creare il widget <b>MapView</b> selezionandolo tra i child del <b>WidgetPanel</b>
+	<li> Impostare gli attributi:
+		<ol type="disc">		
+		<li> <i>MapId</i> e <i>NumLevels</i> con i valori concordati con chi si occupa dei servizi cartografici GIS
+		<li> impostare a true <i>Enable Enrichment</i> 
+		<li> <i>DataType</i> con <b>Complex Type greasemapfacade::MappaWeb</b> 
+		</ol>
+	<li> Creare un AppData <b>Complex Type greasemapfacade::MappaWeb</b> di tipo USER_SESSION (che chiameremo ad esempio <i>mappa1</i>)
+	<li> Creare il Databinding seleziondolo tra i child del MapView e associarlo all' AppData appena creato 
+	<li> Creare 3 oggetti MapEnvelope (startEnvelopeSpec, scaleEnvelopeSpec, maxEnvelopeSpec) selezionandoli tra i chil del MapView e impostare i Point forniti dal gruppo cartografico
+	<li> Modellare un ExecCommand che dovr&agrave; occuparsi dell 'inizializzazione dell' appData <i>mappa1</i> all' ingresso della schermata (lo chiameremo ad esempio <i>preparaMappa</i>).
+	</ol> 
+
+	Dopo aver lanciato il generatore dovremo inizializzare nel metodo <i>preparaMappa</i> l'appdata <i>mappa1</i> invocando il servizio cartografico (&egrave; possibile sfruttare il metodo getMap() della classe di utility <b>it.csi.myprod.mycomp.presentation.uiutils.GreaseDTOMapper</b>) 
+	
+	<h3>Evento al click su un punto della mappa</h3>
+	
+	Per abilitare questa funzionalit&agrave; &egrave; necessario:
+	<ol type="disc">
+	<li>inserire un EventHandler con EventType CLICK
+	<li>introdurre un ExecCommand (che chiameremo ad esempio <i>onClickEvent</i>)  e impostare a RefreshViewCommand uno sei suoi OUTCOME
+	</ol> 
+	Dopo aver lanciato il generatore potremo implementare <i>onClickEvent</i> applicando delle logiche di business sfruttando le coordinate del click (<b>MappaWeb._xclick</b>, <b>MappaWeb._yclick</b>)
+	<h3>Riposizionamento della mappa impostando le coordinate da Business Logic</h3>
+	Tipicamente l' Envelope della mappa viene modellato ma in alcuni casi pu&ograve; essere utile riposizionarsi in funzioni a logiche di Business.
+	<p>
+	Per abilitare questa funzionalit&agrave; &egrave; necessario inserire un ExecCommand (che chiameremo ad esempio <i>changeEnvelope</i>) che verr&agrave; scatenato al verificarsi di un evento definito da specifiche funzionali.
+	Il metodo <i>changeEnvelope</i> si occuper&agrave; della rivalorizzazione dell' Envelope dell' appData <i>mappa1</i> e di settare a a true la property <i>useCurrentEnvelope</i> (per render effettive le modiche).
+</body>
+</html>
