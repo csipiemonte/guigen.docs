@@ -121,7 +121,7 @@ poi applicare la cartuccia di <i>generazione</i> del prototipo.
 
 
 
-<h3>cartuccia di generazione completa dell'applicazione</h3>
+<h3>cartuccia di generazione completa dell'applicazione (modalit&agrave; J2EE application)</h3>
 	  <p>
 	  La cartuccia <code>it/csi/mddtools/guigen/workflow/struts2Basic.mwe</code> serve per effettuare la generazione
 	  completa dell'applicazione, e prevede i seguenti parametri:
@@ -140,14 +140,10 @@ poi applicare la cartuccia di <i>generazione</i> del prototipo.
 	  <td>portal</td>
 	  <td>codice del portale per cui &egrave; necessario generare il codice. I valori possibili sono
 	  	<ul>
-	  	<li>sisp: sistema piemonte (xhtml specifico)</li>
-	  	<li>rupar: rupar piemonte old style (xhtml specifico)</li>
-	  	<li>intranetrp: intranet regione piemonte (xhtml specifico)</li>
 	  	<li>neutral: nuova cartuccia con xhtml "universale"</li>
-	  	<li>newrupar: alias di "neutral" mantenuto per retrocompatibilit&agrave;</li>
 	  	</ul>
 	  </td>
-	  <td><code>sisp</code></td>
+	  <td><code>neutral</code></td>
 	  <td>obbl</td>
 	  </tr>
 	  
@@ -231,16 +227,14 @@ contenga tutti gli <b>ApplicationModule</b> modificati nel modello</li>
 </ul>
 </p>
 
-<h3>cartuccia di generazione del progetto di risorse web</h3>
+<h3>cartuccia di generazione completa dell'applicazione (modalit&agrave; J2EE Portlet/liferay)</h3>
 	  <p>
-	  N.B: la cartuccia <code>it/csi/mddtools/guigen/workflow/webres.mwe</code> presente in versioni precedenti del
-	  tool non &egravE; pi&ugrave; supportata. Il progetto ausiliario contenente le risorse statiche 
-	  (previsto dalla modalit&agrave; <b>M2</b> della cartuccia <i>struts2basic</i>) deve essere creato manualmente.
+	  La cartuccia <code>it/csi/mddtools/guigen/workflow/liferaystruts2.mwe</code> serve per effettuare la generazione
+	  completa dell'applicazione in modalit&agrave; portlet, in modo che possa essere deployata nel portlet container
+	  liferay.
+	  I parametri e le modalit&agrave; di utilizzo sono quelli previsti dalla cartuccia <code>struts2Basic</code>.
 	  </p>
-	  <p>
-	  In un'ottica di applicazione potenzialmente <i>multiportale</i> per ogni componente <i>j2ee</i>
-	  &egrave; possibile che vi siano una o pi&ugrave; componenti di risorse statiche (una per portale).
-	  </p>
+
 <h3>Properties supportate</h3>
 <p>Il generatore <b>GUIGEN</b> supporta le seguenti properties
 <table border="1">
