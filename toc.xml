@@ -33,6 +33,8 @@
     </topic>
     <topic href="html/guigen/mm_reference.html" label="Guida di riferimento metamodello">
     </topic>
+    <topic href="html/guigen/javadoc/index.html" label="Documentazione javadoc">
+    </topic>
     <topic href="html/guigen/models_structure.html" label="Struttura e dipendenza dei modelli">
     </topic>
     <topic href="html/guigen/uipatterns/UI%20Patterns/index.html" label="UI Patterns (progettazione UI con gli elementi a disposizione)">
