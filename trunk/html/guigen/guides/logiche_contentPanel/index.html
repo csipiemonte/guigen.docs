@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Guida all' associazione di logiche applicative al Content
+	Panel</title>
+<link type="text/css" href=".//css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+	<h2>Guida all' associazione di logiche applicative al Content
+		Panel</h2>
+	<h3>Introduzione</h3>
+	<p>
+
+		In <b>guigen</b> per implementare logiche dinamiche tipicamente
+		si fa ricorso ai commands. Gli eventi della vita dell'applicazione in cui pu&ograve; essere
+		inserita la modellazione della logica dinamica sono i seguenti:<br>
+	<ol>
+		<li>inzializzazione dell' applicazione
+		<li>inizialiazzazione\refresh\ingresso in un ContentPanel
+		<li>evento di user interacion (intercettato da un <b>EventHandler</b>)
+	</ol>
+	<br> Escludendo il caso dell'inizializzazione applicativa e concentrandosi sugli eventi relativi al <b>ContentPanel</b>, 
+	per poter modellare questa logica dinamica &egrave; possibile utilizzare l'elemento
+	<b>CPCommand</b> (child del nodo raggruppatore <b>CPCommands</b>). Il
+	<b>CPCommand</b> &egrave; caratterizzato da un nodo child di tipo <i>command</i> nel quale &egrave; possibile
+	modellare la logica vera e propria, e una property
+	<i>execute</i> che definisce il momento, l'evento, in cui questo comando viene attivato :
+	<ol type="disc">
+		<li><i>ON_INIT</i></li>
+		<li><i>ON_REFRESH</i></li>
+		<li><i>ON_ENTER</i></li>
+		<li><i>BEFORE_EVENTS</i></li>
+		<li><i>AFTER_EVENTS</i></li>
+	</ol>
+	<p>Con una opportuna combinazione di logiche distribuite nel vari momenti di innesco &egrave; possibile definire in modo
+	molto fine la logica dinamica delle varie schermate.</p>
+	<br>
+
+	<div align="center">
+		<img alt="Esempio CPCommand" src=".//img/CPCommandeEsempio.png"
+			border="1px" title="Esempio CPCommand" align="middle"> <br>
+		<label><b>Esempio di modellazione</b></label>
+	</div>
+	<br>
+	<br>
+	<br>
+
+	<h3>Tipologie di innesco (execute) dei CPCommand</h3>
+
+	<table class="features" title="Tipi Operation Operation">
+		<thead>
+			<th>Operation</th>
+			<th>Descrizione</th>
+			<th>Esempi di utilizzo</th>
+			<th>Codice Generato</th>
+			<th>Check</th>
+		</thead>
+		<tbody>
+
+			<tr>
+				<td class="featureOperation">ON_INIT</td>
+				<td class="featureDescr">La logica appliucativa &egrave; eseguita ad ogni <i>primo ingresso</i> nel <b>ContentPanel</b>(per sessione).</td>
+				<td class="featureDescr">Viene utilizzato tipicamente per eseguire le operazioni che non &egrave;
+					necessario ripetere durante il flusso e che potrebbero ridurre le
+					capacit&agrave; prestazionali se eseguite ad ogni interazione client/server
+					<ol type="disc">
+						<li>Caricamento Combo dal contenuto immutabile (es. elenco
+							regioni)
+					</ol>
+				</td>
+				<td class="featureDescr">
+				Il <i>programma</i> modellato sul CPCommand viene compilato in una struttura di comandi (pattern command); 
+				l'invocazione avviene nel metodo <code>prepare()</code>.
+				 <br>Poich&egrave; il  <code>prepare()</code> viene invocato prima di ogni <i>action</i>, per vincolare l'esecuzione della logica solo al
+				  primo ingresso viene testata la property di sessione <code>CPCommandInit<i>&lt;ContentPanel.name&gt;</i></code>.
+				</td>
+				<td class="featureDescr">
+					<ol type="disc">
+						<li>un ContentPanel non pu&ograve; contenere pi&ugrave; di un
+							CPCommand di tipo ON_INIT
+					</ol>
+				</td>
+			<tr>
+				<td class="featureOperation">ON_REFRESH</td>
+				<td class="featureDescr">La logica applicativa &egrave; eseguita ad
+					ogni azione di interazione utente eseguita sulla schermata (ingresso nella schermata, evento di interazione con un widget, ...) <br>
+					<b>NOTE:</b> <br>Se in pagina viene inserito un CPCommand
+					ON_INIT allora l'ON_REFRESH non verr&agrave; eseguito al primo
+					accesso alla schermata. <br>Se in pagina viene inserito un CPCommand ON_ENTER
+					allora l'ON_REFRESH non verr&agrave; eseguito in concomitanza al nuovo ingresso al
+					ContentPanel. <br>La logica associata all' ON_REFRESH &egrave;
+					analoga a quella eseguita dal <i>onRefreshCommand</i> definito come nodo figlio diretto del <b>ContentPanel</b>, il quale
+					&egrave; da considerarsi deprecato.
+				</td>
+				<td class="featureDescr">
+				</td>
+				<td class="featureDescr">
+				Il <i>programma</i> modellato sul CPCommand viene compilato in una struttura di comandi (pattern command); 
+				l'invocazione avviene nel metodo <code>prepare()</code>. <br>In questo modo la logica verr&agrave;
+					eseguita ad ogni richiamo della action. <br>Se sono modellati contemporaneamente sia
+					l'ON_INIT che l'ON_REFRESH, poich&egrave; il metodo <code>prepare()</code> viene
+					invocato prima dell'esecuzione della action, per fare in modo che l'esecuzione della logica
+					avvenga solo negli accessi successivi al primo vengono testate la variabile in sessione <code>CPCommandInit<i>&lt;ContentPanel.name&gt;</i></code> e <code>currentContentPanel</code>
+					
+					
+				<td class="featureDescr">
+					<ol type="disc">
+						<li>un ContentPanel non pu&ograve; contenere un CPCommand di
+							tipo ON_REFRESH e un onRefreshCommand contemporaneamente
+						<li>un ContentPanel non pu&ograve; contenere pi&ugrave; di un
+							CPCommand di tipo ON_REFRESH
+					</ol>
+				</td>
+			<tr>
+				<td class="featureOperation">ON_ENTER</td>
+				<td class="featureDescr">La logica applicativa &egrave; eseguita ad ogni
+					accesso ad una schermata. 
+				</td>
+				<td class="featureDescr">Un tipico utilizzo di questo punto di innesco &egrave;
+				    quello di eseguire le logiche applicative dipendenti dal flusso di
+					navigazione e che devono essere eseguite a ogni nuovo ingresso in
+					pagina
+					<ol type="disc">
+						<li>Precaricamento dati in schermata <br>(es.
+							funzionalit&agrave; modifica in un gestionale)
+					</ol>
+				</td>
+				<td class="featureDescr">Il <i>programma</i> modellato sul CPCommand viene compilato in una struttura di comandi 
+				(pattern command); 
+				L'invocazione avviene nel metodo <code>execute()</code> della action, ossia il metodo che viene invocato
+					ad ogni ingresso in pagina</td>
+				<td class="featureDescr">
+					<ol type="disc">
+						<li>un ContentPanel non pu&ograve; contenere pi&ugrave; di un
+							CPCommand di tipo ON_ENTER
+					</ol>
+				</td>
+			<tr>
+				<td class="featureOperation">BEFORE_EVENTS</td>
+				<td class="featureDescr">La logica &egrave; eseguita prima
+					dell' esecuzione della logica associata ad un eventHandler. La logica &egrave; la medesima per tutti gli 
+					<b>EventHandler</b> presenti nella schermata</td>
+				<td class="featureDescr"></td>
+				<td class="featureDescr">Il <i>programma</i> modellato sul CPCommand viene compilato in una struttura di comandi 
+				(pattern command); 
+				L'invocazione avviene nel metodo <code>handle_&lt;widget&gt;_&lt;EVENTO&gt;()</code>, prima dell'invocazione del
+					metodo <code>doCommand()</code> del comando associato all'event handler</td>
+				<td class="featureDescr">
+					<ol type="disc">
+
+						<li>un ContentPanel non pu&ograve; contenere pi&ugrave; di un
+							CPCommand di tipo BEFORE_EVENTS
+					</ol>
+				</td>
+			<tr>
+				<td class="featureOperation">AFTER_EVENTS</td>
+				<td class="featureDescr">La logica &egrave; eseguita dopo l'
+					esecuzione della logica associata ad un eventHandler. La logica &egrave; la medesima per tutti gli
+					<b>EventHandler</b> presenti nella schermata</td>
+				<td class="featureDescr"></td>
+				<td class="featureDescr">Il <i>programma</i> modellato sul CPCommand viene compilato in una struttura di comandi 
+				(pattern command); 
+				L'invocazione avviene nel metodo <code>handle_&lt;widget&gt;_&lt;EVENTO&gt;()</code>, subito dopo l'invocazione del
+					metodo <code>doCommand()</code> del comando associato all'event handler</td>
+				<td class="featureDescr">
+					<ol type="disc">
+
+						<li>un ContentPanel non pu&ograve; contenere pi&ugrave; di un
+							CPCommand di tipo BEFORE_EVENTS
+					</ol>
+				</td>
+		</tbody>
+	</table>
+
+	<h3>Riepilogo delle sequenze di esecuzione delle logiche nei vari punti di innesco, classificate per &quot;evento&quot; associato
+	al content panel</h3>
+	<p>
+	In alcuni casi la sequenza delle logiche eseguite pu&ograve; essere differente a seconda che l'interazione sia realizzata in modalit&agrave;
+	<i>ajax</i> oppure in modalit&agrave; <i>non ajax</i>.</p>
+	<div align="center">
+		<table class="features2" >
+			<thead>
+				<th>Eventi su Content Panel</th>
+				<th>Logiche eseguite</th>
+			</thead>
+			<tbody>
+				<tr >
+					<td class="featureOperation" >Primo ingresso su ContentPanel per sessione applicativa</td>
+					<td >
+						<table align="center"class="tabOperation" >
+							<thead>
+								<th>Modali&agrave; non Ajax</th>
+								<th>Modali&agrave; Ajax *</th>
+							</thead>
+							<tbody >
+								<tr >
+									<td class="featureDescr" >
+									CP Destinazione
+										<ol type="disc">
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/yes.gif">ON_INIT
+											<li><img alt="Operation Eseguita" src=".//img/no.gif">ON_REFRESH
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/yes.gif">ON_ENTER
+										</ol>
+									</td>
+									<td class="featureDescr" >
+								CP Destinazione (prima chiamata)
+										<ol type="disc">
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/yes.gif">ON_INIT
+											<li><img alt="Operation Eseguita" src=".//img/no.gif">ON_REFRESH
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/yes.gif">ON_ENTER
+										</ol>
+									CP Destinazione (seconda chiamta)	
+										<ol type="disc">
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/no.gif">ON_INIT
+											<li><img alt="Operation Eseguita" src=".//img/yes.gif">ON_REFRESH
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/no.gif">ON_ENTER
+										</ol>
+									</td>
+								</tr>
+						</table>
+
+					</td>
+					<tr>
+					<td class="featureOperation">Nuovo ingresso al ContentPanel
+						(diverso da primo ingresso per sessione)</td>
+
+					<td >
+						<table align="center"class="tabOperation" >
+							<thead>
+								<th>Modali&agrave; non Ajax</th>
+								<th>Modali&agrave; Ajax *</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="featureDescr">
+									CP Destinazione
+										<ol type="disc">
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/yes.gif">ON_INIT
+											<li><img alt="Operation Eseguita" src=".//img/no.gif">ON_REFRESH
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/yes.gif">ON_ENTER
+										</ol>
+									</td>
+									<td class="featureDescr">
+									CP Destinazione (prima chiamata)
+										<ol type="disc">
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/yes.gif">ON_INIT
+											<li><img alt="Operation Eseguita" src=".//img/no.gif">ON_REFRESH
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/yes.gif">ON_ENTER
+										
+										</ol>
+										CP Destinazione (seconda chiamta)
+										<ol type="disc">
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/no.gif">ON_INIT
+											<li><img alt="Operation Eseguita" src=".//img/yes.gif">ON_REFRESH
+											<li><img alt="Operation Non Eseguita"
+												src=".//img/no.gif">ON_ENTER
+										</ol>
+									</td>
+								</tr>
+						</table>
+
+					</td>
+				<tr>
+					<td class="featureOperation">Esecuzione logica di un
+						EventHandler (es. OnClick Button)</td>
+					<td class="featureDescr">
+					CP che contiene il widget che ha originato l'evento.
+						<ol type="disc">
+							<li><img alt="Operation Eseguita" src=".//img/yes.gif">Impostazione Parametri a fronte della request HTTP
+							<li><img alt="Operation Eseguita" src=".//img/yes.gif">ON_REFRESH
+							<li><img alt="Operation Eseguita" src=".//img/yes.gif">BEFORE_EVENTS
+							<li><img alt="Operation Eseguita" src=".//img/yes.gif">Logica EventHandler
+							<li><img alt="Operation Eseguita" src=".//img/yes.gif">AFTER_EVENTS
+							<li>(in caso di JumpCommand vengono anche eseguite le logiche associate al pannello destinazione)</li>
+						</ol>
+					</td>
+			</tbody>
+		</table>
+	</div>
+
+	<ol type="disc">
+		<li><img src=".//img/yes.gif">Eseguito
+		<li><img src=".//img/no.gif">Non Eseguito 
+	
+	</ol>
+	
+* Salto verso il CP Destinazione tramite un <i>JumpCommand</i> in modalit&agrave; Ajax.
+<br>Effetto modalit&agrave; Ajax: viene effettuata una seconda chiamata JS sull'action del ContentPanel di destinazione  
+<br>Nella catena vengono mostrati le execute invocate nelle 2 chiamate.
+
+</body>
+
+
+
+</html>

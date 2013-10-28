@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Guida all'utilizzo delle funzioni cartografiche</title>
+<link type="text/css" href=".//css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+	<h2>Guida all'utilizzo delle funzioni cartografiche</h2>
+	<h3>Introduzione</h3>
+	<p>
+	In <b>guigen</b> per utilizzare le funzionalit&agrave; cartografiche &egrave; disponibile il widget <b>MapView</b>, 
+	grazie al quale &egrave; possibile presentare dati geografici e interagire con essi.
+	<p>
+	Le funzionalit&agrave; a disposizione sono descritte nella <a href="../../uipatterns/UI Patterns/Widgets/MapView/index.html">scheda del widget <b>MapView</b></a>. 
+	In sintesi sono:
+	<ol>
+	 <li>Visualizzazione di mappe (*)</li>
+	 <li><i>Zoom</i> e <i>Pan</i> interattivi
+	 <li>Esecuzione di logiche applicative a fronte di un click dell'utente su un punto della mappa (con la possibilit&agrave; di
+	 utilizzare le coordinate del punto cliccato nella logica)</li>
+	 <li>Riposizionamento della porzione visualizzata della mappa impostando le coordinate da Business Logic</li> 	 
+	 <li>Cambio dello sfondo (es. Satelite / Mappa)</li>
+	 <li>Visualizzazione di geometrie su uno strato (layer) &quot;acetato&quot; sovrapposto alla mappa</li>
+	 <li>Editing di geometrie sulla mappa o da Business Logic su layer &quot;acetato&quot; sovrapposto alla mappa</li>		
+	</ol>
+	<p>(*) attualmente sono utilizzabili solo le mappe fornite dalla piattaforma cartografica <i>GREASE</i> 
+	utilizzata in CSI-Piemonte.</p>
+	<p>Il widget <b>MapView</b> si appoggia, come strutture dati, ad un insieme di tipi specifici che sono definiti nel
+	modello di libreria <i>greaseTNS.guigen</i> che contiene il <b>TypeNamespace</b> <i>greasemapfacade</i>.</p>
+	
+	<h3>Funzialit&agrave; base: Visualizzazione, Zoom e Pan</h3>	
+	
+	Per visualizzare una mappa &egrave; sufficiente utilizzare un widget <b>MapView</b>.
+	
+	E' necessario eseguire i seguenti passi:
+	<ol>	
+	<li> Creare un <b>WidgetPanel</b> all' interno del pannello in cui &egrave; necessario visualizzata la mappa, 
+	tenendo conto che:
+		<ul>
+		<li>non &egrave; possibile inserire altri widget nel <b>WidgetsPanel</b> che contiene un <b>MapView</b></li>
+		<li>occorre progettare la schermata tenendo conto dell'ingombro della mappa</li> 
+		</ul>
+	<li> Inserire il widget <b>MapView</b> nel <b>WidgetPanel</b>
+	<li> Impostare i seguenti attributi del widget <b>MapView</b>:
+		<ol type="disc">		
+		<li> <i>MapId</i> e <i>NumLevels</i>: i valori devono essere forniti da chi si occupa dei servizi cartografici GIS
+		<li> <i>Enable Enrichment</i> deve essere impostato a <i>true</i> (il widget <b>MapView</b> &egrave; totalmente
+		 basato su javascript) 
+		<li> <i>DataType</i> deve essere impostato con il <b>Complex Type</b> <i>greasemapfacade::MappaWeb</i> 
+		(vedere sezione sul binding per ulteriori informazioni) 
+		</ol>
+	<li> Creare un <b>ApplicationData</b> di tipo  <i>greasemapfacade::MappaWeb</i>, con durata USER_SESSION o SAME_PAGE; 
+	questo dato applicativo conterr&agrave; le informazioni di base sullo stato della mappa, quali ad esempio 
+	le coordinate correnti dell'envelope visualizzato, ed &egrave; utilizzato principalmente in modo trasparente 
+	dal framework cartografico.
+	</li> 
+	<li> Aggiungere un databinding al <b>MapView</b> e associarlo all' <b>ApplicationData</b> appena creato</li> 
+	<li> Modellare tre oggetti MapEnvelope (startEnvelopeSpec, scaleEnvelopeSpec, maxEnvelopeSpec) come figli del nodo <b>MapView</b> 
+	e impostare i <b>Point</b> forniti da chi fornisce il servizio cartografico. Queste informazioni sono utilizzate per l'inizializzazione della
+	mappa (envelope iniziale, chge definisce la porzione di mappa visualizzata; envelope massimo che si pu&ograve;
+	raggiungere con la funzionalit&agrave; di <i>zoom out</i>; granularit&agrave; dei salti nelle operazioni di <i>zoom</i>)
+	<li> Modellare, a fronte degli eventi impliciti di <i>onInit</i> (inizializzazione una-tantum della schermata, al primo ingresso nella schermata) o
+	<i>onEnter</i> (ogni ingresso nella schermata) in modo che venga eseguuito un <b>ExecCommand</b> che dovr&agrave; occuparsi dell' inizializzazione dell' <b>ApplicationData</b> all' ingresso 
+	della schermata (ad esempio: <i>preparaMappa</i>). 
+	</ol> 
+	<p>
+	Dopo aver lanciato il generatore dovremo inizializzare nel metodo <i>preparaMappa</i> l'appdata definito in precedenza
+	invocando l'adapter al servizio cartografico, che &egrave; un bean di spring automaticamente generato a fronte della modellazione del widget
+	<b>MapView</b>.
+	</p> 
+	<pre><code>
+        ...
+        mappa = mapAdapterMYMAPPA.getMap();
+        theModel.setAppDatamappa1(mappa);
+        ...
+	</code></pre>
+	<h3>Evento al click su un punto della mappa</h3>
+	<p>
+	Per abilitare questa funzionalit&agrave; &egrave; necessario:</p>
+	<ol type="disc">
+	<li>inserire un <b>EventHandler</b> con EventType CLICK
+	<li>modellare un <b>ExecCommand</b> (con <i>methodName</i> che ad esempio vale <i>onMapClick</i>); &egrave; importante fare in modo che uno gei suoi OUTCOME
+	esegua un <b>RefreshViewCommand</b>, pena il non funzionamento della logica. 
+	</ol> 
+	
+	<p>Nella regione protetta corrispondente al metodo <i>onMapClick</i> &egrave; necessario poi implementare le necessarie logiche di 
+	business, sfruttando le coordinate del click (che sono disponibili nelle propriet&agrave; <i>xclick</i>, <i>yclick</i> dell'<b>ApplicatonData</b> associato al
+	widget <b>MapView</b>).</p>
+	<h3>Riposizionamento programmatico della mappa (impostando le coordinate da Business Logic)</h3>
+	Nela caso in cui i requisiti richiedano un posizionamento da programma della porzione di mappa visibile (ad esempio per centrare una specifica
+	area) &egrave; possibile farlo semplicemente impostando da logica le coordinate dell'<i>envelope</i> da visualizzare.
+	<p>
+	Per utilizzare questa funzionalit&agrave; &egrave; necessario modellare un ExecCommand (con <i>methodName</i> che vale ad esempio <i>moveMap</i>).
+	Il metodo <i>moveMap</i> deve:
+	<ul>
+	<li>valorizzare le coordinate dell'envelope destinazione (quiello su cui si vuole riposizionare la mappa)</li>
+	<li>impostare a <i>true</i> la property <i>useCurrentEnvelope</i> (per fare in modo che al successivo render della mappa vengano utilizzate tali coordinate.</li>
+	</ul>
+	
+</body>
+</html>

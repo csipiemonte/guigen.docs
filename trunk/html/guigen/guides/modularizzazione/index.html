@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Buone pratiche di modularizzazione</title>
+      <link type="text/css" href="../../mddtools.css" rel="stylesheet"/>
+   </head>
+
+   <body>
+      <h2>
+         Buone pratiche di modularizzazione
+      </h2>
+      <h3>Elementi di modularizzazione</h3>
+      <p>
+      La modularizzazione di un software rappresenta uno strumento indispensabile per governare la complessit&agrave;
+      e aumentare la manutenibilit&agrave; dello stesso. Questo &egrave; vero anche per i progetti realizzati in modalit&agrave; 
+      model-driven: in questo caso, ovvimente, il concetto di &quot;modularizzabilit&agrave;&quot; si applica a livello di
+      <i>modelli</i>.
+      </p>
+      <p>
+      I punti di moularizzabilit&agrave; messi a disposizione da <b>Guigen</b> sono i seguenti: 
+      </p>
+      <ul>
+      <li>possibilit&agrave; di raggruppare pi&ugrave; <b>ContentPanel</b> in <b>AppModule</b></li>
+      <li>possibilit&agrave; di definire <i>package</i> di tipi, raggruppandoli sotto uno stesso <b>TypeNamespace</b></li>
+      <li>possibilit&agrave; di raggruppare un insieme di <b>ApplicationData</b> in uno stesso <b>AppDataGroup</b>
+      <li>possibilit&agrave; di definire un frammento di struttura UI, tramite l'elemento <b>PanelDef</b> per poi riutilizzarlo
+      in pi&ugrave; <b>ContentPanel</b></li>
+      </ul>
+      <p>Questa modularizzazione si concretizza nella creazione di pi&ugrave; file di modello, interconnessi secondo quanto descritto 
+      <a href="../../models_structure.html">qui</a>.</p>
+      <p>Di seguito vengono illustrate alcune buone pratiche per la gestione modulare di un progetto <b>guigen</b>.</p>
+      
+      <h3>AppModule</h3>
+      <h4>Buone pratiche di strutturazione degli AppModule</h4>
+      <p>Non &egrave; semplice definire un insieme di regole esaustive che permettano di organizzare al meglio gli 
+      <b>AppModule</b> che costituiscono l'applicativo: la scelta del come raggruppare le differenti schermate dipende
+      molto dalla tipologia del progetto ma, talvolta, anche dall'organizzazione del gruppo di lavoro. Poich&egrave;
+      gli <b>AppModule</b> non sono altro che gruppi di <b>ContentPanel</b> che hanno <i>qualcosa in comune</i>, 
+      &egrave; opportuno evidenziare uali possono essere i criteri di <i>coesione</i> che possono portare a raggruppare un insieme
+      di <b>ContentPanel</b>. 
+      </p>
+      	<h5>Un AppModule = una funzionalit&agrave;</h5>
+      <p>
+      Questo approccio prevede la collocazione in uno stesso AppModule di tutti i ContentPanel che realizzano una sola 
+      funzionalit&agrave;. Esempio: funzione di gestione CRUD di un dato di business. L'AppModule potrebbe contenere ad esempio:
+      </p>
+      <ul>
+      <li>un ContentPanel per i filtri di ricerca</li>
+      <li>un ContentPanel per i risultati di ricerca</li>
+      <li>un ContentPanel per il dettaglio del singolo elemento, con possibilit&agrave; di editing</li>
+      </ul>
+      <p>
+      Si presta bene per quelle funzionalit&agrave; che non sono realizzabili mediante un singolo ContentPanel.
+      </p>
+      	<h5>Un AppModule = un sottosistema o profilo funzionale</h5>
+      <p>
+      Questo approccio prevede la collocazione in uno stesso AppModule di tutti i ContentPanel che realizzano un insieme di 
+      funzionalit&agrave; (sottosistema) o le funzionalit&agrave; legate ad un particolare profilo utente.
+      L'AppModule potrebbe contenere uno o pi&ugrave; ContentPanel per ogni funzonalit&agrave;.
+      </p>
+      <h4>Cattive pratiche di strutturazione</h4>	
+      <p>Esistono poi alcuni esempi negativi (bad practice) di strutturazione di <b>AppModule</b>:</p>
+      <ul>
+      <li>un AppModule = un ContentPanel: la tentazione di una simile suddivisione potrebbe derivare dalla volont&agrave; di
+      rendere possibile l'assegnazione dello sviluppo della singola schermata ad uno specifico sviluppatore. Raramente
+      per&ograve; una funzionalit&agrave; &egrave; costituita da un singolo ContentPanel pertanto questo approccio 
+      eccessivamente &quot;granulare&quot; ha l'unico effetto di moltiplicare il numero di file del progetto e le dipendenze tra i vari
+      sotto-modelli.</li>
+      <li>Un unico AppModule: questo approccio tipicamente nasce in quei progetti in cui non viene fatta una macroanalisi 
+      funzionale iniziale che possa evidenziare una modularizzazione di tipo funzionale. L'adozione di un simile approccio
+      mostra i suoi limiti nel momento in cui l'applicazione prende corpo le funzioni aumentano in numero, rendendo molto difficile 
+      lo sviluppo parallelo del progetto.</li>
+      <li>AppModule privi di connotazione esplicita: se non si individua la connotazione che caratterizza un AppModule
+      (ad esempio secondo le best practices di cui sopra) potrebbe veriifcarsi una mera suddivisione numerica dei ContentPanel
+      nei vari AppModule (es. module1, module2, ...) che non d&agrave; grossi vantaggi rispetto ad una gestione piatta.</li>
+      </ul>	
+      <h4>Effetti sul codice generato della strutturazione degli AppModule</h4>
+      <p>La strutturazione delle schermate in AppModule comporta effetti sia sul codice generato, sia sulle configurazioni, 
+      sia sulle URL dell'applicazione. </p>
+      <p>Per quanto riguarda il codice generato vi sono i seguenti effetti:</p>
+      <ul>
+      <li>la classi java delle action relative ai <b>ContentPanel</b> sono generate tutte all'interno di uno stesso package
+      (che ha il nome dell'AppModule), sotto il package <code>it.csi.[prodotto].[componente].presentation</code></li>
+      <li>la classi java del model relativi ai <b>ContentPanel</b> sono generate tutte all'interno di uno stesso package
+      (che ha il nome dell'AppModule), sotto il package <code>it.csi.[prodotto].[componente].dto</code></li>
+      <li>la classi java dei bean di spring relativi ai <b>ContentPanel</b> sono generate tutte all'interno di uno stesso package
+      (che ha il nome dell'AppModule), sotto il package <code>it.csi.[prodotto].[componente].business</code></li>
+      </ul>
+      <p>Per quanto riguarda l'organizzazione in namespace struts, occorre ancora dire che ciascun <b>AppModule</b> pu&ograve; essere
+      marcato come <i>secure</i>. A fronte dell'eventuale presenza di questa impostazione e a fronte del nome dell'<b>AppModule</b> si
+      hanno i seguenti effetti:</p>
+      <ul>
+      <li>l'url di esposizione della action corrispondente al singolo <b>ContentPanel</b> &egrave;:
+      	<ul>
+      	<li><code>/[contesto]/base/[modulo]/[contentPanel].do</code> se il modulo non &egrave; marcato come <i>secure</i></li>
+      	<li><code>/[contesto]/secure/[modulo]/[contentPanel].do</code> se il modulo &egrave; marcato come <i>secure</i></li>
+      	</ul>
+      </li>
+      </ul>
+      <p>Aggiungendo che tutte le action globali sono di default sotto il namespace <i>secure</i> (es. <code>HomePage.do</code>, <code>Logout.do</code>)
+      questa strutturazione in namespace permette la realizzazione di esposizioni pi&ugrave; mirate tramite il web server, ad esempio permettendo di
+      proteggere con Shibboleth solo alcune action e altre no).
+      </p>
+      <p>
+      Per quanto riguarda la configurazione l'unico effetto sta nella generazione di un file di configurazione di struts per ciascun namespace, 
+      e pertanto per ciascun <b>AppModule</b>.
+      </p>
+      
+      <h3>TypeNamespace</h3>
+      <h4>Buone pratiche di strutturazione dei TypeNamespacee</h4>
+      <p>Le buone pratiche di strutturazione dei package di tipi in un qualsiasi linguaggio di programmazione si applicano anche
+      al contesto dei modelli. Occorre tener presente che, a differenza dei ContentPanel de degli AppModule, i tipi sono utilizzabili
+      in molte funzionalit&agrave;. D'altra parte &egrave; vero che i tipi utilizzati in guigen sono destinati a contenere
+      il <i>model</i> delle schermate e pertanto alcuni ComplexType sono specifici di una singola schermata. 
+      </p>
+      <ul>
+      <li>mettere in uno stesso TypeNamespace tutti i tipi specifici di un certo sottoinsieme di dati di business. Questo
+      TypeNamespace tipicamente viene riusato in pi&ugrave; moduli di applicazione.</li>
+      <li>mettere in uno stesso TypeNamespace tutti i tipi associati alle schermate di un AppModule. Tipicamente questi tipi
+      possono a loro volta utilizzare come membri tipi pi&ugrave; generici (quelli del punto precedente, ad esempio)</li>
+      </ul>
+      <h4>Effetti sul codice generato</h4>
+      <p>L'effetto dell'appartenenza di un <b>ComplexType</b> ad uno specifico <b>TypeNamespace</b> &egrave; che la classe corrispondente
+      viene generata in un sotto-package del package <i>dto</i> che ha il nome del <b>TypeNamespace</b>.</p>
+      
+      <h3>AppDataGroup</h3>
+      <h4>Buone pratiche di strutturazione degli AppDataGroup</h4>
+      <p>Gli ApplicationData rappresentano il corrispettivo nel mondo MDD di quello che sono le variabili applicative
+      nella programmazione tradizionale. Pertanto le pratiche di buona strutturazione sono almeno in parte le stesse che
+      si adottano per la definizione delle variabili nella propria applicazione.</p>
+      <p>La suddivisione in AppDataGroup rappresenta solo un raggruppamento logico dell ApplicationData utile a governare meglio
+      la numerosit&agrave; degli ApplicationData. Alcune buone pratiche di organizzazione sono:</p>
+      <ul>
+      <li>un AppDataGroup per variabili a scope globale, trasversale a tutte le funzionalit&agrave;</li>
+      <li>un AppDataGroup per ogni Appmodule, contenente tutti gli ApplicationData utilizzati nelle schermate di quell'
+      AppModule
+      </ul>  
+      <h4>Effetti sul codice generato</h4>
+      <p>Non vi sono effetti sul codice generato in quanto il generatore non genera nulla a fronte dell'esistenza di un <b>ApplicationData</b>,
+      ma genera solo codice a fronte dell'utilizzo che di tali elementi viene fatto nelle schermate.</p>
+   </body>
+</html>
