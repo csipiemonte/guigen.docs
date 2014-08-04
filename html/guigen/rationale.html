@@ -47,7 +47,7 @@
       E' l'architettura base, quella che viene generata se si utilizza la cartuccia <b>struts2</b>
       senza l'abilitazione delle funzionalit&agrave; <i>ricche</i>.
       Si tratta di una classica applicazione web realizzata in tecnologia J2EE (compatibile con i 
-      runtime WLS 9.2 e JBoss 4.3). I framework utilizzati sopra lo strato J2EE per la realizzazione
+      runtime WLS 9.2 e JBoss 4.3, JBoss 6.0, JBoss 6.2). I framework utilizzati sopra lo strato J2EE per la realizzazione
       del <i>core</i> dell'applicazione sono:
       <ul>
       <li><b>struts2</b> per la realizzazione dello strato Model-View-Controller (in particolare
@@ -150,7 +150,7 @@
       <p>
       La logica di business &egrave; modellata secondo il pattern <i>command</i>, nei vari punti in cui
       questo &egrave; previsto (inizializzazione dell'applicazione, refresh della schermata, 
-      event handler).
+      event handler, ingresso o inizializzaizone di una schermata, ...).
       A livello di codice generato il pattern command &egrave; implementato come segue:
       <ul>
       <li>vengono messe a disposizione una serie di classi di implementazione dei vari comandi 
@@ -176,6 +176,8 @@
       	</ul>
       </li>
       </ul> 
+      Le catene di comandi sono serializzate in file <b>json</b> che vengono caricati al momento
+      dell&apos; esecuzione della stessa.
       </p>
       
       <h6>stato applicativo</h6>
@@ -288,7 +290,7 @@
       Tale meccanismo di basa sul rilevamento client-side della disponibilit&agrave; del linguaggio
       javascript e la differenziazione server side del rendering a seconda che tale rilevamento abbia 
       fornito un esito positivo o negativo. Il risultato ottenuto &egrave; che l'utente riuscir&agrave;
-      comunque a svolgere le funzionalità principali rinunciando per&ograve; necessariamente
+      comunque a svolgere le funzionalitï¿½ principali rinunciando per&ograve; necessariamente
       alle sotto-funzionalit&agrave; ausiliarie.
       </p>
       
@@ -431,7 +433,7 @@
       
       <h6>metodi exec command</h6>
       <p>
-      Al fine di realizzare la differente ripartizione di responsabilità nell'esecuzione
+      Al fine di realizzare la differente ripartizione di responsabilitï¿½ nell'esecuzione
       dei comandi (descritta al paragrafo precedente) &egrave; necessario introdurre in ciascuna
       action una ulteriore serie di metodi, detti di <i>exec command</i> che hanno l'unico scopo
       di esporre allo strato di componenti client i metodi di business disponibili nello strato spring.
