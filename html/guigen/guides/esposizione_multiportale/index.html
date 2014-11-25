@@ -60,10 +60,14 @@
       <p>Le due modalit&agrave; sono gestite in modo armonizzato dal codice generato:
       <ul>
       <li>l'informazione proveniente dal sistema di autenticazione &egrave; inserita dall'infrastruttura
-      di autenticazione </li>
-      <li>l'informazione esplicita &egrave; utilizzata solo in caso di assenza di sistema di autenticazione
-      e deve essere fornita tramite un parametro di nome &quot;PORTALE&quot; da inserire nella url di accesso
-      iniziale (per il valore da impostare a seconda del portale consultare la sezione &quot;portal profiles&quot;)</li>
+      di autenticazione (N.B: questa modalit&agrave; &egrave; deprecata).</li>
+      <li>l'informazione esplicita &egrave; utilizzata solo in caso di assenza di sistema di autenticazione. 
+      L'implementazione di default prevede che tale informazione sia fornita tramite un parametro di nome 
+      &quot;PORTALE&quot; da inserire nella url di accesso iniziale (per il valore da impostare a seconda del 
+      portale consultare la sezione &quot;portal profiles&quot;)</li>
+      <li>&egrave; inoltre possibile modellare esplicitamente un elemento di tipo <b>WAYFProfile</b> che permette
+      di personalizzare il comportamento relativamente alla risoluzione del portale di provenienza
+      (vedere sotto l'apposita sezione).</li>
       </ul>
       </p>
       <h3>Portal profiles</h3>
@@ -81,7 +85,8 @@
       del <b>Portal Profile</b>:
       <ul>
       <li>codice identificativo del portale: a scopo mnemonico</li>
-      <li>codice identificativo del portale per il meccanismo di <i>Where Are You From</i></li>
+      <li>codice identificativo del portale per il meccanismo di <i>Where Are You From</i> (che varia a seconda che 
+      si usi un particolare <b>WAYFProfile</b> personalizzato)</li>
       <li>codice discriminante del <i>resource provider</i> (utilizzato dal meccanismo di inclusione remota)</li>
       <li>elenco dei moduli JS utilizzati, con versione e collocazione su repart (non utilizzati - solo a scopo di
       gestione di configurazione)</li>
@@ -118,5 +123,41 @@
       nel <b>PortalProfile</b> corrispondente</li>
       </ol>
       </p>
+      <h3>WAYF profile</h3>
+      <p>E' possibile personalizzare il modo in cui il sistema risolve il portale di provenienza, utilizzando
+      un elemento di tipo <b>WAYFProfile</b>, che pu&ograve; essere modellato nell'oggetto <b>TargetPlatform</b>.</p>
+      <p>Come figlio dell'oggetto <b>WAYFProfile</b> &egrave; necessario modellare un elemento di tipo 
+      <b>WAYFRequestAdapter</b> ch epermette di personalizzare il modo in cui il sistema di risoluzione del portale
+      di provenienza ottiene le informazioni discriminanti a partire dalla request o dalla sessione.</p>
+      <p>Nell'elemento <b>WAYFRequestAdapter</b> &egrave; necessario modellare:</p>
+      <ul>
+      <li>la property <i>sourceType</i>: pu&ograve; assumere i seguenti valori:
+        <ul>
+        <li>REQUEST_PARAM</li>
+        <li>REQUEST_ATTRIBUTE</li>
+        <li>REQUEST_HEADER</li>
+        <li>REQUEST_COOKIE</li>
+        <li>REQUEST_URL</li>
+        <li>SESSION_ATTRIBUTE</li>
+        </ul>
+      </li>
+      <li>la property <i>infoSourceName</i>:
+        <ul>
+        <li>in tutti i casi diversi da REQUEST_URL il valore di questo parametro indica da quale
+        parametro/header/cookie, ... prendere il valore discriminante)</li>
+        <li>nel caso REQUEST_URL questo parametro pu&ograve; valere solo DOMAIN_L2 oppure DOMAIN_L3:
+        in entrambi i casi il comportamento prevede che venga estratto dalla url di richiesta l'hostname
+        e il valore discriminante sia la parte finale di tale hostname, fino al dominio di secondo o terzo livello
+        a seconda che si sia specificato il valore DOMAIN_L2 o DOMAIN_L3</li>
+        </ul>
+      </li>
+      </ul>
+      <p>Ad esempio per fare in modo che il portale di provenienza sia risolto dall'url &egrave;, prendendo
+      come chiave di decodifica il dominio di secondo livello, &egrave; necessario modellare un 
+      <b>WAYFProfile</b> con un <b>WAYFRequestAdapter</b> cos&igrave, costituito:</p>
+      <ul>
+      <li>sourceType: REQUEST_URL</li>
+      <li>infoSourceName: DOMAIN_L2</li>
+      </ul>
    </body>
 </html>
