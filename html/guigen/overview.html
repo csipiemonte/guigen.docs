@@ -391,8 +391,16 @@ E' possibile modellare la maggior parte delle caratteristiche di sicurezza dell'
 </ul>
 
 Lo sviluppatore ha inoltre a disposizione nella business logic le info relative all'utente corrente, nell'ApplicationData denominato "currentUser".
+
+<br/><br/>(@since 3.1.0) L'interazione con il servizio PEP (PolicyEnforcementPoint di IRIDE2) pu&ograve; avvenire con il protocollo RMI oppure con il protocollo WS.
+La scelta avviene tramite una property da impostare nel file di propriet&agrave; di build specifiche di un determinato ambiente, in modo
+da permettere l'utilizzo di protocolli differneti su ambienti differenti.
+La properiet&agrave; da impostare &egrave; <b>iride2.pep.pd.protocol</b> e pu&ograve; valere <b>EJB</b> (default) o <b>WS</b>.   
+E' poi necessario impostare i parametri di collegamento per i due protocolli, tramite le due propriet&agrave;
+<b>iride2.pep.provider.url</b> e <b>iride2.pep.wsfad.url</b>.
 </p>
-	
+<p>Nel caso in cui fosse necessario implementare meccanismi di autenticazione e/o autorizzazione specifici, &egrave;
+possibile seguire l'apposita <a href="guides/custom_security/index.html">guida</a>.</p>
 <h4>Definizione del <b>model</b> gestito nell'applicativo</h4>
 	
 	<p>
