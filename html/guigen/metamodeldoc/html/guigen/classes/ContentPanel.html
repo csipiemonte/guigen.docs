@@ -42,6 +42,7 @@ tipi di layout.</p>
 <p>Direct References</p>
 <ul>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ApplicationData.html">guigen :: ApplicationData</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ContentPanel.html#re_appData">appData</a></li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/CPCommands.html">guigen :: CPCommands</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ContentPanel.html#re_cpCommands">cpCommands</a></li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ScreenState.html">guigen :: ScreenState</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ContentPanel.html#re_defaultState">defaultState</a></li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/DialogPanel.html">guigen :: DialogPanel</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ContentPanel.html#re_dialogs">dialogs</a></li>
 	<li><img src="../../icons/ecore/DAbstractClass.gif" /><a href="../../guigen/classes/Command.html">guigen :: Command</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ContentPanel.html#re_onRefreshCommand">onRefreshCommand</a></li>
@@ -65,10 +66,10 @@ tipi di layout.</p>
 
 <p>Referenced by</p>
 <ul>
-	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ContentPanel.html">guigen :: ContentPanel</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ApplicationArea.html#re_contentPanels">contentPanels</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ApplicationArea.html">guigen :: ApplicationArea</a>)</li>
-	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ContentPanel.html">guigen :: ContentPanel</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ApplicationArea.html#re_homePage">homePage</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ApplicationArea.html">guigen :: ApplicationArea</a>)</li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ContentPanel.html">guigen :: ContentPanel</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/AppModule.html#re_contentPanels">contentPanels</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/AppModule.html">guigen :: AppModule</a>)</li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ContentPanel.html">guigen :: ContentPanel</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/JumpCommand.html#re_jumpTo">jumpTo</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/JumpCommand.html">guigen :: JumpCommand</a>)</li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ContentPanel.html">guigen :: ContentPanel</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ApplicationArea.html#re_contentPanels">contentPanels</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ApplicationArea.html">guigen :: ApplicationArea</a>)</li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ContentPanel.html">guigen :: ContentPanel</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ApplicationArea.html#re_homePage">homePage</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ApplicationArea.html">guigen :: ApplicationArea</a>)</li>
 </ul>
 
 <h2><a name="at_name" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EString name</h2>
@@ -173,6 +174,61 @@ Deprecato: definire gli <b>ApplicationData</b> in uno o pi&ugrave;
 
 
 <tr><td>upperBound</td><td>-1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="re_cpCommands" /><img src="../icons/ecore/EReference.gif" />Reference guigen :: CPCommands cpCommands</h2>
+<p>Contenitore dei comandi associati al content panel (vengono eseguiti in 
+differenti momenti a seconda del tipo di esecuzione del singolo comando)</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/CPCommands.html">guigen :: CPCommands</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>containment</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>cpCommands</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>resolveProxies</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
 
 
 <tr><td>volatile</td><td>false</td></tr>
@@ -469,4 +525,4 @@ questo comando viene eseguito <b>prima</b> del comando associato.
 </tbody>
 </table>
 
-<div>generated on 23-nov-2011 at 17.52.50 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
+<div>generated on 19-dic-2014 at 14.52.44 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>

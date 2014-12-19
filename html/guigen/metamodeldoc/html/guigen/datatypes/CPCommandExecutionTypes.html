@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Developer documentation for the ecore model enum CPCommandExecutionTypes</title>
+	</head><body>
+<h1><a name="c_guigen_CPCommandExecutionTypes" />Enum "CPCommandExecutionTypes"</h1>
+<p>Defined in package : <img src="../../icons/ecore/EPackage.gif" /><a href="../../guigen/package.html">guigen</a></p>
+
+
+<p>Referenced by</p>
+<ul>
+	<li><img src="../../icons/ecore/EEnum.gif" /><a href="../../guigen/datatypes/CPCommandExecutionTypes.html">guigen :: CPCommandExecutionTypes</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/CPCommand.html#at_execute">execute</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/CPCommand.html">guigen :: CPCommand</a>)</li>
+</ul>
+
+<h2><a name="el_ON_INIT" /><img src="../icons/ecore/EEnumLiteral.gif" />Enum Literal ON_INIT(ON_INIT) = 0</h2>
+<p>Il comando viene eseguito al primo ingresso nel content panel. Serve pertanto
+per l'inizializzazione del ContentPanel</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+
+<tr><td>literal</td><td>ON_INIT</td></tr>
+
+
+<tr><td>name</td><td>ON_INIT</td></tr>
+
+
+<tr><td>value</td><td>0</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="el_ON_ENTER" /><img src="../icons/ecore/EEnumLiteral.gif" />Enum Literal ON_ENTER(ON_ENTER) = 1</h2>
+<p>Il comando viene eseguito ad ogni ingresso nel content panel (proveniente da
+un a differente schermata). Serve pertanto per quei casi in cui sia
+necessaria una inizializzazione del ContentPanel che non possa essere effettuata
+una tantum, ma debba essere ripetuta ad ogni ingresso.</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+
+<tr><td>literal</td><td>ON_ENTER</td></tr>
+
+
+<tr><td>name</td><td>ON_ENTER</td></tr>
+
+
+<tr><td>value</td><td>1</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="el_BEFORE_EVENTS" /><img src="../icons/ecore/EEnumLiteral.gif" />Enum Literal BEFORE_EVENTS(BEFORE_EVENTS) = 2</h2>
+<p>Il comando viene eseguito prima dell'esecuzione di ogni evento esplicito su uno dei
+widget della schermata. </p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+
+<tr><td>literal</td><td>BEFORE_EVENTS</td></tr>
+
+
+<tr><td>name</td><td>BEFORE_EVENTS</td></tr>
+
+
+<tr><td>value</td><td>2</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="el_AFTER_EVENTS" /><img src="../icons/ecore/EEnumLiteral.gif" />Enum Literal AFTER_EVENTS(AFTER_EVENTS) = 3</h2>
+<p>Il comando viene eseguito al termine dell'esecuzione di ogni evento esplicito su uno dei
+widget della schermata (prima dell'eventuale cambio di schermata)</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+
+<tr><td>literal</td><td>AFTER_EVENTS</td></tr>
+
+
+<tr><td>name</td><td>AFTER_EVENTS</td></tr>
+
+
+<tr><td>value</td><td>3</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="el_ON_REFRESH" /><img src="../icons/ecore/EEnumLiteral.gif" />Enum Literal ON_REFRESH(ON_REFRESH) = 4</h2>
+<p>Il comando viene eseguito ad ogni refresh della schermata; se il refresh &egrave;
+scatenato da un evento su un widget, il comando viene eseguito prima dell'
+esecuzione ddell'evento. </p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+
+<tr><td>literal</td><td>ON_REFRESH</td></tr>
+
+
+<tr><td>name</td><td>ON_REFRESH</td></tr>
+
+
+<tr><td>value</td><td>4</td></tr>
+
+
+</tbody>
+</table>
+
+
+<div>generated on 19-dic-2014 at 14.52.44 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
