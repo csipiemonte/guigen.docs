@@ -65,7 +65,7 @@
       L'implementazione di default prevede che tale informazione sia fornita tramite un parametro di nome 
       &quot;PORTALE&quot; da inserire nella url di accesso iniziale (per il valore da impostare a seconda del 
       portale consultare la sezione &quot;portal profiles&quot;)</li>
-      <li>&egrave; inoltre possibile modellare esplicitamente un elemento di tipo <b>WAYFProfile</b> che permette
+      <li>&egrave; inoltre possibile (ed &egrave; <b>consigliato</b>) modellare esplicitamente un elemento di tipo <b>WAYFProfile</b> che permette
       di personalizzare il comportamento relativamente alla risoluzione del portale di provenienza
       (vedere sotto l'apposita sezione).</li>
       </ul>
@@ -159,5 +159,43 @@
       <li>sourceType: REQUEST_URL</li>
       <li>infoSourceName: DOMAIN_L2</li>
       </ul>
+      
+      <h3>Considrazioni su WAYFProfile di tipo REQUEST_URL e attiivt&agrave; di sviluppo</h3>
+      
+      <p>Come visto in precedenza &egrave; possibile modellare un <b>WAYFProfile</b> custom in modo tale che
+      l'informazione discriminante sia reperita da una parte dell'URL di richiesta (es. il dominio di secondo livello).
+      Poich&egrave; i codici associati ai vari portali di esposizione sono modellati nell'oggetto <b>PortalProfile</b>,
+      una volta generato il progetto affinch&egrave; il meccanismo WAYF funzioni correttamente &egrave; necessario che
+      l'URL di richiesta rispetti con precisione tali specifiche.</p>
+      <p>Ad esempio se nel <b>PortalProfile</b> viene configurato il codice "sistemapiemonte.it", il virtual host
+      su cui deve essere esposto l'applicativo deve appartenere a tale dominio di rete.</p>
+      <p>Questo non rappresenta ovviamente un problema per gli ambienti di esercizio, ma potrebbe essere un problema
+      se le attivit&agrave; di sviluppo sono effettuate utilizzando ad esempio un virtual-host situato su una rete
+      differente.</p>
+      <p>Per superare questo problema &egrave; disponibile una modalit&agrave; alternativa attivabile non a tempo di
+      generazione ma a tempo di build, ovvero attivabile solo sugli ambienti di sviluppo, ad esempio.</p>
+      <p>La modalit&agrave; si attiva tramite una propriet&agrave; di nome <i>devmode</i> che, se impostata a true nel
+      file di properties specifico di un determinato ambiente di installazione, attiva un meccanismo di risoluzione
+      alternativo che entra in gioco come "salvagente" nel caso in cui l'informazione discriminante non sia reperibile
+      o decodificabile correttamente a partire dalla fonte specificata</p>
+      <p>Una volta abilitata la modalit&agrave; di sviluppo il meccanismo di riserva deve essere innescato
+      manualmente inserendo nella URL di accesso un parametro HTTP che:</p>
+      <ul>
+      <li>si chiama come la propriet&agrave; <i>infoSourceName</i> modellata nell'oggetto <b>WAYFRequestAdapter</b>
+      (nell'esempio: <i>DOMAIN_L2</i>)</li>
+      <li>ha come valore il codice configurato nell'oggetto <b>PortalProfile</b> (nell' es. <i>sistemapiemonte.it</i>
+      o <i>ruparpiemonte.it</i>)</li>
+      </ul>
+      <p>(in pratica il meccanismo di riserva &egrave; equivalente ad un <b>WAYFRequestAdapter</b> di tipo <i>REQUEST_PARAM</i> 
+      corrispondente a quello effettivamente modellato)</p>
+      <p>Pertanto per far funzionare, ad esempio, il meccanismo di WAYF su un'applicazione installata su un apache
+      con virtual-host non conoforme alle specifiche di nome dominio, occorrer&agrave; effettuare la prima chiamata
+      in modo simile al seguente:</p>
+      <p><code>http://127.0.0.1:17000/mycontext/?DOMAIN_L2=sistemapiemonte.it</code></p>
+      <p>(dove ovviamente l'hostname/ip dell'apache e il nome del contesto sono solo esemplificativi, mentre
+      il nome del parametro e il suo valore sono quelli dell'esempio di cui sopra).</p>
+      <p>N.B: si consiglia di non attivare la modalit&agrave; di sviluppo per i pacchetti destinati ad ambienti dove
+      ci&ograve; non sia necessario. In ogni caso, per&ograve, il meccanismo di riserva interviene <b>solo</b>
+      in caso di fallimento del meccanismo principale.</p>
    </body>
 </html>
