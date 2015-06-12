@@ -45,6 +45,7 @@
 <ul>
 	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Column.html#at_activeFlagSelector">activeFlagSelector</a></li>
 	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Column.html#at_customDecorator">customDecorator</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Column.html#at_customSortPropertySelector">customSortPropertySelector</a></li>
 	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Column.html#at_editable">editable</a></li>
 	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Column.html#at_editableFlagSelector">editableFlagSelector</a></li>
 	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Column.html#at_eventActive">eventActive</a></li>
@@ -86,8 +87,8 @@
 <p>Referenced by</p>
 <ul>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/Column.html">guigen :: Column</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/TableCustomizationPDefVal.html#re_hiddenCols">hiddenCols</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/TableCustomizationPDefVal.html">guigen :: TableCustomizationPDefVal</a>)</li>
-	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/Column.html">guigen :: Column</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ColumnModel.html#re_columns">columns</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ColumnModel.html">guigen :: ColumnModel</a>)</li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/Column.html">guigen :: Column</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ExtraColumn.html#re_insertAfter">insertAfter</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ExtraColumn.html">guigen :: ExtraColumn</a>)</li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/Column.html">guigen :: Column</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/ColumnModel.html#re_columns">columns</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/ColumnModel.html">guigen :: ColumnModel</a>)</li>
 </ul>
 
 <h2><a name="at_activeFlagSelector" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EString activeFlagSelector</h2>
@@ -173,6 +174,60 @@ per impostazioni grafiche particolari da effettuarsi a livello della singola col
 
 
 <tr><td>name</td><td>customDecorator</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="at_customSortPropertySelector" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EString customSortPropertySelector</h2>
+<p>Opzionale. Permette di indicare un campo differente da 
+utilizzare per l'ordinamento della colonna. Utile in caso di decorator o in quei
+casi in cui serva un ordinamento custom dei valori della colonna (esempio: 
+ordinamento dei valori della colonna senza tener conto di articoli, etc..)</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>customSortPropertySelector</td></tr>
 
 
 <tr><td>ordered</td><td>true</td></tr>
@@ -859,4 +914,4 @@ utilizzare <i>multidataPropertySelector</i>.</p>
 </tbody>
 </table>
 
-<div>generated on 19-dic-2014 at 14.52.44 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
+<div>generated on 12-giu-2015 at 11.18.44 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
