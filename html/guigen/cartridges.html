@@ -11,6 +11,16 @@
       <p>
          In questo capitolo sono descritte le carucce (<i>cartridge</i>) di generazione disponibili.
       </p>
+      <p><font color="red">Nota bene</font>: dalla versione 3.2 il parametro <i>portal</i>, che era presente dalla prima versione di guigen,
+       &egrave; soppiantato dalla coppia di parametri  <i>templateName</i> e <i>templateVersion</i>. Pertanto i progetti
+       che utilizzavano l'impostazione <i>portal="neutral"</i> dovranno eliminare tale parametro e sostiutuirlo con la coppia di parametri:
+       </p>
+       <ul>
+       <li><i>templateName="neutral"</i></li>
+       <li><i>templateVersion="v1"</i> (la "v" &egrave; minuscola) </li>
+       </ul>
+       <p>In pratica <i>portal="neutral"</i> equivale a <i>templateName="neutral" + templateVersion="v1"</i>. 
+       Per i dettagli circa i possibili valori dei nuovi parametri vedere sotto.</p>
       <h3>cartuccia di verifica dei modelli</h3>
 	  <p>
 	  La cartuccia <code>it/csi/mddtools/guigen/workflow/guigenCheck.mwe</code> serve per effettuare il check semantico
@@ -27,17 +37,34 @@
 	  </tr>
 	  
 	  <tr>
-	  <td>portal</td>
-	  <td>codice del portale per cui &egrave; necessario generare il codice. I valori possibili sono
+	  <td>templateName</td>
+	  <td>codice del template da utilizzare per generare il codice. sostituisce il vecchio parametro "portal". I valori possibili sono:
 	  	<ul>
-	  	<li>sisp: sistema piemonte (xhtml specifico)</li>
-	  	<li>rupar: rupar piemonte old style (xhtml specifico)</li>
-	  	<li>intranetrp: intranet regione piemonte (xhtml specifico)</li>
-	  	<li>neutral: nuova cartuccia con xhtml "universale"</li>
-	  	<li>newrupar: alias di "neutral" mantenuto per retrocompatibilit&agrave;</li>
+	  	<li>neutral: nuova cartuccia con xhtml o html5 "universale"</li>
 	  	</ul>
 	  </td>
-	  <td><code>sisp</code></td>
+	  <td><code>neutral</code></td>
+	  <td>obbl</td>
+	  </tr>
+	  
+	  <tr>
+	  <td>templateVersion</td>
+	  <td>a partire dallo stesso template (<i>templateName</i>) permette di creare delle versioni parzialmente
+	  diversificate. Di seguito i valori possibili, per ciascun valore di <i>templateName</i>: 
+	  	<ul>
+	  	<li>per il template <i>neutral</i>:
+	  		<ul>
+	  		<li>v1: corrisponde alla classica cartuccia che si specificava nelle versioni precedenti tramite il parametro <i>portal=neutral</i>.
+	  		Permette di generare codice xhtml o html5 arricchito con javascript (jquery o extjs) destinato ad un utilizzo di PC desktop o laptop, senza supporto
+	  		specifico di dispositivi di immissione touch</li>
+	  		<li>v2: corrisponde ad una variante della cartuccia <i>neutral</i>.
+	  		Permette di generare codice html5 arricchito con javascript (solo jquery) destinato ad un utilizzo di PC desktop o laptop, o tablet, con supporto
+	  		specifico di dispositivi di immissione touch (cosiddetta cartuccia "touch friendly")</li>
+	  		</ul>
+	  	</li>
+	  	</ul>
+	  </td>
+	  <td><code>v1</code></td>
 	  <td>obbl</td>
 	  </tr>
 	  
@@ -137,13 +164,34 @@ poi applicare la cartuccia di <i>generazione</i> del prototipo.
 	  </tr>
 	  
 	  <tr>
-	  <td>portal</td>
-	  <td>codice del portale per cui &egrave; necessario generare il codice. I valori possibili sono
+	  <td>templateName</td>
+	  <td>codice del template da utilizzare per generare il codice. sostituisce il vecchio parametro "portal". I valori possibili sono:
 	  	<ul>
-	  	<li>neutral: nuova cartuccia con xhtml "universale"</li>
+	  	<li>neutral: nuova cartuccia con xhtml o html5 "universale"</li>
 	  	</ul>
 	  </td>
 	  <td><code>neutral</code></td>
+	  <td>obbl</td>
+	  </tr>
+	  
+	  <tr>
+	  <td>templateVersion</td>
+	  <td>a partire dallo stesso template (<i>templateName</i>) permette di creare delle versioni parzialmente
+	  diversificate. Di seguito i valori possibili, per ciascun valore di <i>templateName</i>: 
+	  	<ul>
+	  	<li>per il template <i>neutral</i>:
+	  		<ul>
+	  		<li>v1: corrisponde alla classica cartuccia che si specificava nelle versioni precedenti tramite il parametro <i>portal=neutral</i>.
+	  		Permette di generare codice xhtml o html5 arricchito con javascript (jquery o extjs) destinato ad un utilizzo di PC desktop o laptop, senza supporto
+	  		specifico di dispositivi di immissione touch</li>
+	  		<li>v2: corrisponde ad una variante della cartuccia <i>neutral</i>.
+	  		Permette di generare codice html5 arricchito con javascript (solo jquery) destinato ad un utilizzo di PC desktop o laptop, o tablet, con supporto
+	  		specifico di dispositivi di immissione touch (cosiddetta cartuccia "touch friendly")</li>
+	  		</ul>
+	  	</li>
+	  	</ul>
+	  </td>
+	  <td><code>v1</code></td>
 	  <td>obbl</td>
 	  </tr>
 	  
@@ -160,8 +208,8 @@ poi applicare la cartuccia di <i>generazione</i> del prototipo.
 	  <td>codice della piattaforma javascript d autilizzare per gli arricchimenti client-side. Po&ograve;
 	  valere:
 	  	<ul>
-	   <li>&quot;jquery&quot; = framework basato su JQuery</li> 
-	   <li>&quot;extjs&quot; = framework basato su Sencha ExtJS 3.4 (deprecato)</li>
+	   <li>&quot;jquery&quot; = framework basato su JQuery, valido con <i>templateName=neutral</i> in qualsiasi versione</li> 
+	   <li>&quot;extjs&quot; = framework basato su Sencha ExtJS 3.4 (deprecato e valido per <i>templateName=neutral</i> ma solo con versione "v1")</li>
 	   </ul>
 	   </td>
 	    
