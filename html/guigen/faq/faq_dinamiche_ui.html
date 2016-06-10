@@ -142,18 +142,32 @@
      <!-- 3 -->
      <div class="faq_question">
      <p>Q: Ho visto che per abilitare/disabilitare (mostrare/nascondere) dei <b>Widget</b>
-     esistono due possibilit&agrave;: <b>ONOFFCommand</b> (<b>VisibilityCommand</b>) vs 
-     <b>ScreenStateCommand</b>. Quali sono le differenze e quali sono le casistiche di utilizzo
-     delle due modalit&agrave;?</p>
+     esistono tre possibilit&agrave;:</p> 
+     <ol>
+     <li><b>ONOFFCommand</b> (<b>VisibilityCommand</b>) </li> 
+     <li><b>ScreenStateCommand</b>. </li>
+     <li><b>DeclarativeUIConstraint</b> (da v. 3.2.0)</li>
+     </ol>
+     <p>Quali sono le differenze e quali sono le casistiche di utilizzo
+     delle tre modalit&agrave;?</p>
      </div>
      <div class="faq_answer">
-     <p><b>A:</b> La differenza fondamentale tra le due modalit&agrave; sta nel fatto che i comandi
+     <p><b>A:</b>Una prima differenza deve rilevarsi tra prime due modalit&agrave; e la terza:
+     mentre infatti i primi due casi rappresentano <i>comandi</i> che devono essere esplicitamente 
+     eseguiti a fronte di un evento, il terzo caso rappresenta una <i>condizione</i> logica che
+     deve essere verificata affinch&egrave; il widget sia visualizzato/abilitato.
+     L'importanza di tale differenza sta nel fatto che i <i>comandi</i> devono essere eseguiti in un momento
+     preciso e a fronte di quel comando cambia lo stato corrente del <b>Widget</b>, mentre
+     nel caso del <b>DeclarativeUIConstraint</b> il criterio viene valutato ad ogni rendering e non 
+     muta lo stato del <b>Widget</b>.</p>
+     
+     <p> Relativamente alle prime due modalit&agrave; la differenza fondamentale tra le due modalit&agrave; sta nel fatto che i comandi
      <b>ONOFFCommand</b> e <b>VisibilityCommnad</b> agiscono puntualmente su un insieme (anche ridotto)
      di widget e\o menu, mentre lo <b>ScreenStateCommand</b> permette di effettuare lo switch di <b>ScreenState</b>
      che rappresenta un set completo di abilitazioni/disabilitazioni dei widget contenuti nella
      schermata. 
 	 </p>
-	 <p>Da questa differenza sostanziale derivano le differenti casistiche di utilizzo:
+	 <p>Da questa differenza sostanziale derivano le differenti casistiche di utilizzo:</p>
 	 	<ul>
 	 	<li>Il meccanismo degli <b>ScreenState</b> &egrave; adatto a situazioni in cui il 
 	 	grado di indipendenza dei vari widget (dal p.v. dell'abilitazione) &egrave; basso,
@@ -165,7 +179,15 @@
 	 	e non &egrave; pertanto agevole individuare un insieme sufficientemente ristretto
 	 	di stati possibili (troppe permutazioni possibili)</li>
 	 	</ul> 
-	 </p>
+	 <p>La modalit&agrave; del <b>DeclarativeUIConstraint</b>, invece, essendo 
+	 fondata sulla definizione di <i>criteri</i> di abilitazione/visibilit&agrave; basati
+	 sullo stato del <i>model</i>, risulta particolarmente utile in casistiche in cui l'abilitazione/visibilit&agrave;
+	 o meno del <b>Widget</b> debba essere condizionata ai valori contenuti nel <i>model</i>, piuttosto
+	 che ad un particolare evento occorso nella UI. Se ad esempio un campo <i>tfPartitaIVA</i> sia da
+	 visualizzare solo se il campo "<i>personaFisica: boolean</i>" di un <b>ApplicationData</b> "<i>soggetto</i>" 
+	 &egrave; valorizzato a <i>false</i>, allora risulta preferibile utilizzare un <b>DeclarativeUIConstraint</b>
+	 in cui si descriva tale criterio (es: [<code>model.appDatapersona != null && model.appDatapersona.personaGiuridica == false</code>]) piuttosto che
+	 accendere o spegnere il widget in modo comandato all'atto del caricamento del dato.</p>
      </div>
      <br/>
      
