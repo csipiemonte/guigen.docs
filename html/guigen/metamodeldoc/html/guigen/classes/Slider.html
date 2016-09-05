@@ -7,9 +7,9 @@
 	</head><body>
 <h1>Class "guigen :: Slider"</h1>
 <p>Defined in package : <img src="../../icons/ecore/EPackage.gif" /><a href="../../guigen/package.html">guigen</a></p>
-<p><p>Widget che permette di selezionare uno o due valori in un range numerico continuo.
-</p>
-<p><b>aspetto grafico</b></p>
+<p>Widget che permette di selezionare uno o due valori in un range numerico continuo. </p>
+<br></br>
+<b>aspetto grafico</b>
 <ul>
 	<li>E' dotato di etichetta come tutti gli altri widget a lato del widget;</li>
 	<li>appare come un classico slider, ad orientamento orizzontale</li>
@@ -19,7 +19,8 @@
 	<li>in caso di slider a selezione multipla appaiono due elementi spostabili,uno per l'estremo inferiore 
        ed uno per l'estremo superiore del range e le due posizioni determineranno la coppia di valori che
        rappresenteranno gli estremi del range</li>
-</ul><br /><p><b>binding con dati</b></p>
+</ul><br /><br></br>
+<b>binding con dati</b>
 <ul>
 	<li> lo slider &egrave; un <b>DataWidget</b>, pertanto il suo valore sar&agrave; sincronizzato 
 	con un <b>ApplicationData</b> tramite data-binding:
@@ -43,16 +44,17 @@
                 	 e superiore del range selezionabile</li>
        	</ul>
   	</li>
-</ul><br /><p></b>opzioni di configurazione</b></p>
+</ul><br /><br></br>
+<b>opzioni di configurazione</b>
 <ul>
     <li>il tipo del binding determina se lo slider è da considerarsi puntuale o di intervallo</li>
     <li> l'opzione useCollectionDataAs determina come considerare i dati del collection binding:
       <ul>
-        <li>"values" -> valori discreti selezionabili verrà implementato in futuro </li>
-        <li> "range" -> estremi dell'intervallo (continuo/numerico) selezionabile </li>
+        <li>"values": valori discreti selezionabili verrà implementato in futuro </li>
+        <li> "range": estremi dell'intervallo (continuo/numerico) selezionabile </li>
      </ul>
    </li>
-</ul></p>
+</ul><br /><p></p>
 
 
 
@@ -161,11 +163,11 @@
 
 
 <h2><a name="at_staticLowerBound" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EFloatObject staticLowerBound</h2>
-<p><p>
+<p>
 Nel caso di range staticamente definito a tempo di modellazione il valore
 di questa property viene utilizzato come estremo inferiore del range di valori 
 selezionabili
-</p></p>
+</p>
 
 
 
@@ -216,10 +218,10 @@ selezionabili
 </table>
 
 <h2><a name="at_staticStep" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EFloatObject staticStep</h2>
-<p><p>
+<p>
 se configurato definisce di quanto aumenta/diminuisce il valore selezionato
 a fronte di uno spostamento unitario del selettore
-</p></p>
+</p>
 
 
 
@@ -270,11 +272,11 @@ a fronte di uno spostamento unitario del selettore
 </table>
 
 <h2><a name="at_staticUpperBound" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EFloatObject staticUpperBound</h2>
-<p><p>
+<p>
 Nel caso di range staticamente definito a tempo di modellazione il valore
 di questa property viene utilizzato come estremo superiore del range di valori 
 selezionabili
-</p></p>
+</p>
 
 
 
@@ -325,7 +327,7 @@ selezionabili
 </table>
 
 <h2><a name="at_useCollectionDataAs" /><img src="../icons/ecore/EAttribute.gif" />Attribute guigen :: SliderCollectionValuesUsageTypes useCollectionDataAs</h2>
-<p><p>
+<p>
 Permette di decidere come utilizzare il contenuto del collection data binding.
 Attualmente l'unico valore ammissibile &egrave; "range" e indica al generatore 
 di utilizzare i primi due elementi (numerici) dell'array collegato tramite collection
@@ -333,7 +335,7 @@ data binding come estremi inferiore e superiore del range di valori selezionabil
 N.B: serve nei casi in cui sia necessario un range dinamico; nel caso in cui invece
 sia sufficiente un range statico definito a tempo di modellazione &egrave; necessario
 modellare le due property <i>staticLowerBound</i> e <i>staticUpperBound</i>
-</p></p>
+</p>
 
 
 
@@ -386,4 +388,4 @@ modellare le due property <i>staticLowerBound</i> e <i>staticUpperBound</i>
 
 
 
-<div>generated on 5-set-2016 at 15.43.40 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
+<div>generated on 5-set-2016 at 16.27.37 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
