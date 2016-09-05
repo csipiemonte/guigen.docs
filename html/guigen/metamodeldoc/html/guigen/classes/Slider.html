@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Developer documentation for the model class Slider</title>
+	</head><body>
+<h1>Class "guigen :: Slider"</h1>
+<p>Defined in package : <img src="../../icons/ecore/EPackage.gif" /><a href="../../guigen/package.html">guigen</a></p>
+<p><p>Widget che permette di selezionare uno o due valori in un range numerico continuo.
+</p>
+<p><b>aspetto grafico</b></p>
+<ul>
+	<li>E' dotato di etichetta come tutti gli altri widget a lato del widget;</li>
+	<li>appare come un classico slider, ad orientamento orizzontale</li>
+	<li>contestualmente allo slider &egrave; visualizzato il valore correntemente selezionato</li>
+	<li>in caso di slider a selezione singola appare solo un elemento spostabile che determiner&agrave;
+       	il valore selezionato</li>
+	<li>in caso di slider a selezione multipla appaiono due elementi spostabili,uno per l'estremo inferiore 
+       ed uno per l'estremo superiore del range e le due posizioni determineranno la coppia di valori che
+       rappresenteranno gli estremi del range</li>
+</ul><br /><p><b>binding con dati</b></p>
+<ul>
+	<li> lo slider &egrave; un <b>DataWidget</b>, pertanto il suo valore sar&agrave; sincronizzato 
+	con un <b>ApplicationData</b> tramite data-binding:
+  		<ul>
+    			<li>se il tipo dell'application data collegato &egrave; un tipo semplice (non array)  lo slider sar&agrave;
+           			da considerarsi a selezione puntuale, e il valore selezionato sar&agrave; sincronizzato con il valore 
+           			di tale application data</li>
+    			<li>se il tipo dell'application data collegato &egrave; un array di tipi semplici lo slider sar&agrave; 
+           			da considerarsi a selezione di intervallo e il range selezionato dar&agrave; origine ad un array di 
+           			due elementi che conterranno l'estremo inferiore e l'estremo superiore dell'intervallo</li>
+  		</ul>
+	</li>
+  	<li>pu&ograve; essere definito un collection binding, che viene interpretato diversamente a seconda 
+           del valore dell'opzione <i>useCollectionDataAs</i>
+	       <ul>       
+       		   <li>se <i>useCollectionBindingAs</i>="values": gli elementi dell'application data collegato 
+                 		saranno presi come valori discreti selezionabili (e saranno considerati ordinati secondo 
+                 		l'ordinamento dell'array) <b>N.B: FEATURE NON ANCORA IMPLEMENTATA</b></li>
+          		  <li>  se <i>useCollectionDataAs</i>="range": gli elementi 0 e 1 dell'array (che devono essere 
+                		necessariamente numerici ed ordinati in modo crescente) rappresentano gli estremi inferiore 
+                	 e superiore del range selezionabile</li>
+       	</ul>
+  	</li>
+</ul><br /><p></b>opzioni di configurazione</b></p>
+<ul>
+    <li>il tipo del binding determina se lo slider è da considerarsi puntuale o di intervallo</li>
+    <li> l'opzione useCollectionDataAs determina come considerare i dati del collection binding:
+      <ul>
+        <li>"values" -> valori discreti selezionabili verrà implementato in futuro </li>
+        <li> "range" -> estremi dell'intervallo (continuo/numerico) selezionabile </li>
+     </ul>
+   </li>
+</ul></p>
+
+
+
+
+<p>Super and Sub Types</p>
+
+
+<ul><li><img src="../../icons/ecore/DAbstractClass.gif" /><a href="../../guigen/classes/Widget.html">guigen :: Widget</a>
+<ul><li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/DataWidget.html">guigen :: DataWidget</a>
+
+
+<ul><li><img src="../../icons/ecore/DAbstractClass.gif" /><a href="../../guigen/classes/Widget.html">guigen :: Widget</a>
+<ul><li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/MultiDataWidget.html">guigen :: MultiDataWidget</a>
+
+<ul><li><b><img src="../icons/ecore/EClass.gif" />guigen :: Slider</b>
+
+</li></ul>
+
+
+</li></ul>
+</li></ul>
+
+
+</li></ul>
+</li></ul>
+
+
+
+
+
+<table border="1">
+
+
+<tr style="vertical-align:top">
+
+
+<td>
+<p>Direct Attributes</p>
+<ul>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EFloatObject.html">ecore :: EFloatObject</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Slider.html#at_staticLowerBound">staticLowerBound</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EFloatObject.html">ecore :: EFloatObject</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Slider.html#at_staticStep">staticStep</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EFloatObject.html">ecore :: EFloatObject</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Slider.html#at_staticUpperBound">staticUpperBound</a></li>
+	<li><img src="../../icons/ecore/EEnum.gif" /><a href="../../guigen/datatypes/SliderCollectionValuesUsageTypes.html">guigen :: SliderCollectionValuesUsageTypes</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Slider.html#at_useCollectionDataAs">useCollectionDataAs</a></li>
+</ul>
+
+</td>
+
+
+
+
+<td>
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+<tr style="vertical-align:top">
+
+
+<td>
+<p>Inherited Attributes</p>
+<ul>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/DataWidget.html#at_dataTypeModifier">dataTypeModifier</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/DataWidget.html#at_required">required</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Widget.html#at_defaultEnabled">defaultEnabled</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Widget.html#at_defaultVisible">defaultVisible</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBooleanObject.html">ecore :: EBooleanObject</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Widget.html#at_enableEnrichment">enableEnrichment</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Widget.html#at_label">label</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Widget.html#at_name">name</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Widget.html#at_tooltip">tooltip</a></li>
+</ul>
+
+</td>
+
+
+
+
+<td>
+<p>Inherited References</p>
+<ul>
+	<li><img src="../../icons/ecore/DAbstractClass.gif" /><a href="../../guigen/classes/Type.html">guigen :: Type</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/DataWidget.html#re_dataType">dataType</a></li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/AppDataBinding.html">guigen :: AppDataBinding</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/DataWidget.html#re_databinding">databinding</a></li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/AppDataBinding.html">guigen :: AppDataBinding</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/MultiDataWidget.html#re_multiDataBinding">multiDataBinding</a></li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../guigen/classes/EventHandler.html">guigen :: EventHandler</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/Widget.html#re_eventHandlers">eventHandlers</a></li>
+	<li><img src="../../icons/ecore/DAbstractClass.gif" /><a href="../../guigen/classes/WidgetLayoutSpecifier.html">guigen :: WidgetLayoutSpecifier</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/Widget.html#re_layoutSpec">layoutSpec</a></li>
+	<li><img src="../../icons/ecore/DAbstractClass.gif" /><a href="../../guigen/classes/UISecurityConstraint.html">guigen :: UISecurityConstraint</a> <img src="../icons/ecore/EReference.gif" /><a href="../../guigen/classes/Widget.html#re_securityConstraints">securityConstraints</a></li>
+</ul>
+
+</td>
+
+
+
+
+
+</tr>
+
+
+</table>
+
+
+<h2><a name="at_staticLowerBound" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EFloatObject staticLowerBound</h2>
+<p><p>
+Nel caso di range staticamente definito a tempo di modellazione il valore
+di questa property viene utilizzato come estremo inferiore del range di valori 
+selezionabili
+</p></p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EFloatObject.html">ecore :: EFloatObject</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>staticLowerBound</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="at_staticStep" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EFloatObject staticStep</h2>
+<p><p>
+se configurato definisce di quanto aumenta/diminuisce il valore selezionato
+a fronte di uno spostamento unitario del selettore
+</p></p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EFloatObject.html">ecore :: EFloatObject</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>1</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>staticStep</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="at_staticUpperBound" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EFloatObject staticUpperBound</h2>
+<p><p>
+Nel caso di range staticamente definito a tempo di modellazione il valore
+di questa property viene utilizzato come estremo superiore del range di valori 
+selezionabili
+</p></p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EFloatObject.html">ecore :: EFloatObject</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>staticUpperBound</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="at_useCollectionDataAs" /><img src="../icons/ecore/EAttribute.gif" />Attribute guigen :: SliderCollectionValuesUsageTypes useCollectionDataAs</h2>
+<p><p>
+Permette di decidere come utilizzare il contenuto del collection data binding.
+Attualmente l'unico valore ammissibile &egrave; "range" e indica al generatore 
+di utilizzare i primi due elementi (numerici) dell'array collegato tramite collection
+data binding come estremi inferiore e superiore del range di valori selezionabili.
+N.B: serve nei casi in cui sia necessario un range dinamico; nel caso in cui invece
+sia sufficiente un range statico definito a tempo di modellazione &egrave; necessario
+modellare le due property <i>staticLowerBound</i> e <i>staticUpperBound</i>
+</p></p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EEnum.gif" /><a href="../../guigen/datatypes/SliderCollectionValuesUsageTypes.html">guigen :: SliderCollectionValuesUsageTypes</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>useCollectionDataAs</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+
+
+
+<div>generated on 5-set-2016 at 15.43.40 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>

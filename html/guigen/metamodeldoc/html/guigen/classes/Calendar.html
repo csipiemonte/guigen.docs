@@ -39,6 +39,32 @@
 <table border="1">
 
 
+<tr style="vertical-align:top">
+
+
+<td>
+<p>Direct Attributes</p>
+<ul>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Calendar.html#at_selectMonth">selectMonth</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Calendar.html#at_selectYear">selectYear</a></li>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../guigen/classes/Calendar.html#at_selectYearRange">selectYearRange</a></li>
+</ul>
+
+</td>
+
+
+
+
+<td>
+
+</td>
+
+
+
+
+
+</tr>
+
 
 
 
@@ -84,6 +110,167 @@
 
 </table>
 
+
+<h2><a name="at_selectMonth" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EBoolean selectMonth</h2>
+<p>se valorizzato a <i>true</i> permette all'utente la scelta del mese tramite una
+dropdown list</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>false</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>selectMonth</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="at_selectYear" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EBoolean selectYear</h2>
+<p>se valorizzato a <i>true</i> permette all'utente la scelta dell'anno tramite una
+dropdown list</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EBoolean.html">ecore :: EBoolean</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>false</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>selectYear</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="at_selectYearRange" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EString selectYearRange</h2>
+<p>permette di specificare il range di selezione dell'anno (utilizzato solo se 
+<i>selectYear = true</i>:
+<ul>
+<li>"-nn:+nn" : range relativo all'anno corrente (es. "-100:+50") </li>
+<li>"c-nn:c+nn" : range relativo all'anno correntemente selezionato (es. "c-5:c+5") </li>
+<li>"-nnnn:+nnnn" : range assoluto (es. "-1950:+1999") </li>
+</ul></p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>selectYearRange</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
 
 
 
@@ -137,4 +324,4 @@ di dato previsto (maschera GG/MM/AAAA)</li>
 </tbody>
 </table>
 
-<div>generated on 21-giu-2016 at 11.23.30 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
+<div>generated on 5-set-2016 at 15.43.40 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
