@@ -11,7 +11,7 @@
       <p>
          In questo capitolo sono descritte le carucce (<i>cartridge</i>) di generazione disponibili.
       </p>
-      <p><font color="red">Nota bene</font>: dalla versione 3.2 il parametro <i>portal</i>, che era presente dalla prima versione di guigen,
+      <p><font color="red">Nota [1]</font>: dalla versione 3.2 il parametro <i>portal</i>, che era presente dalla prima versione di guigen,
        &egrave; soppiantato dalla coppia di parametri  <i>templateName</i> e <i>templateVersion</i>. Pertanto i progetti
        che utilizzavano l'impostazione <i>portal="neutral"</i> dovranno eliminare tale parametro e sostiutuirlo con la coppia di parametri:
        </p>
@@ -21,6 +21,18 @@
        </ul>
        <p>In pratica <i>portal="neutral"</i> equivale a <i>templateName="neutral" + templateVersion="v1"</i>. 
        Per i dettagli circa i possibili valori dei nuovi parametri vedere sotto.</p>
+<p><font color="red">Nota [2]</font>: la property
+	  <code>guigen.clientLibs.enableAutoServicePack</code>
+	  che permetteva di scegliere se abilitare o meno la possibilit&agrave; di recepire automaticamente
+	  (ovvero senza dover aggiornare il plugin + rigenerare + rideployare) i <i>fix critici</i> apportati alle
+	  librerie JS successivamente alla data di pubblicazione del plugin, a partire dalla versione 3.2.0 di 
+	  guigen non &egrave; pi&ugrave; disponibile. 
+	  Di conseguenza tutte le librerie che prevedono tale modalit&agrave; (ad oggi "extjscsienricher" e 
+	  "jqcsienricher") saranno sempre referenziate con la versione "latest" (es. "jqcsienricher/1.1.latest").
+	  Eventuali impostazioni di tale property verranno semplicemente ignorate.
+</p>
+
+
       <h3>cartuccia di verifica dei modelli</h3>
 	  <p>
 	  La cartuccia <code>it/csi/mddtools/guigen/workflow/guigenCheck.mwe</code> serve per effettuare il check semantico
@@ -337,34 +349,7 @@ contenga tutti gli <b>ApplicationModule</b> modificati nel modello</li>
 	  </td>
 	  </tr>
 	  
-	  <tr>
-	  <td><code>guigen.clientLibs.enableAutoServicePack</code></td>
-	  <td>
-	  	<ul>
-	  	<li>scopo: se impostato a <i>true</i> e se nel <b>TargetPlatform</b> del modello principale 
-	  &egrave; impostato l'utilizzo delle funzioni ricche, che prevedono l'utilizzo di librerie JS
-	  per la loro implementazione, verr&agrave; abilitata la possibilit&agrave; di recepire automaticamente
-	  (ovvero senza dover aggiornare il plugin + rigenerare + rideployare) i <i>fix critici</i> apportati alle
-	  librerie JS successivamente alla data di pubblicazione del plugin. Ad esempio, supponendo che alla
-	  data di rilascio della versione 1.6.1 di guigen la libreria <i>extcsienricher</i> utilizzata fosse
-	  la <b>1.4.0</b>, se la property &egrave; impostata a <i>true</i> il codice html referenzier&agrave; 
-	  la cartella <i>1.4.latest</i> mentre se la propriet&agrave; &egrave; impostata a <i>false</i> il codice
-	  html referenzier&agrave; la cartella <i>1.4.0</i>. Nel momento in cui dovesse essere rilasciata una
-	  correzione critica (<i>1.4.1</i>) della libreria questa verrebbe rilasciata sul sito
-	  	<ul>
-	  	<li>in una nuova cartella 1.4.1, per referenziare la quale occorrer&agrave; attendere una nuova
-	  	versione di guigen</li>
-	  	<li>nella cartella 1.4.latest, sovrascrivendo la vecchia versione</li>
-	  	</ul>
-	  </li>
-   		<li>default: true</li>
-	  	</ul>
-	  </td>
-	  <td>true</td>
-	  <td>
-	  	<i>struts2Basic.mwe</i> e <i>struts2BasicSingleModule.mwe</i> con <i>portal</i>="neutral", <i>webres.mwe</i></td>
-	  </td>
-	  </tr>
+
 	  
 	  <tr>
 	  <td><code>generate-appmodules</code></td>
